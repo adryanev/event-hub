@@ -1,4 +1,4 @@
-namespace: backend\tests
+namespace: admin\tests
 actor_suffix: Tester
 paths:
     tests: tests

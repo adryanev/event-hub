@@ -24,8 +24,15 @@ info "Update OS software"
 apt-get update
 apt-get upgrade -y
 
-info "Install additional software"
-apt-get install -y php7.0-curl php7.0-cli php7.0-intl php7.0-mysqlnd php7.0-gd php7.0-fpm php7.0-mbstring php7.0-xml unzip nginx mysql-server-5.7 php.xdebug
+info "Install php & apache2 software"
+apt-get install software-properties-common python-software-properties
+add-apt-repository -y ppa:ondrej/php
+apt-get update
+apt-get install -y php7.2 php7.2-common php7.2-curl php7.2-cli php7.2-intl php7.2-mysqlnd php7.2-gd php7.2-fpm php7.2-mbstring php7.2-xml libapache2-mod-php unzip apache2 mysql-server-5.7 php.xdebug
+
+info "Install NodeJS"
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+apt-get install -y nodejs
 
 info "Configure MySQL"
 sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -35,30 +42,40 @@ mysql -uroot <<< "DROP USER 'root'@'localhost'"
 mysql -uroot <<< "FLUSH PRIVILEGES"
 echo "Done!"
 
-info "Configure PHP-FPM"
-sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
-sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
-sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
-cat << EOF > /etc/php/7.0/mods-available/xdebug.ini
-zend_extension=xdebug.so
-xdebug.remote_enable=1
-xdebug.remote_connect_back=1
-xdebug.remote_port=9000
-xdebug.remote_autostart=1
-EOF
-echo "Done!"
+#info "Configure PHP-FPM"
+#sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+#sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+#cat << EOF > /etc/php/7.2/mods-available/xdebug.ini
+#zend_extension=xdebug.so
+#xdebug.remote_enable=1
+#xdebug.remote_connect_back=1
+#xdebug.remote_port=9000
+#xdebug.remote_autostart=1
+#EOF
+#echo "Done!"
+#
+#info "Configure Apache"
+#sed -i 's/user www-data/user vagrant/g' /etc/nginx/nginx.conf
+#echo "Done!"
 
-info "Configure NGINX"
-sed -i 's/user www-data/user vagrant/g' /etc/nginx/nginx.conf
+info "Configure Apache2"
+a2enmod php7.2
+a2enmod proxy_fcgi setenvif
+a2enconf php7.0-fpm
+a2enmod rewrite
 echo "Done!"
 
 info "Enabling site configuration"
-ln -s /app/vagrant/nginx/app.conf /etc/nginx/sites-enabled/app.conf
+cp /app/vagrant/apache2/app.conf /etc/apache2/sites-available/app.conf
+echo "Done!"
+
+info "Activating Site"
+a2ensite app.conf
 echo "Done!"
 
 info "Initailize databases for MySQL"
-mysql -uroot <<< "CREATE DATABASE yii2advanced"
-mysql -uroot <<< "CREATE DATABASE yii2advanced_test"
+mysql -uroot <<< "CREATE DATABASE `event-hub`"
 echo "Done!"
 
 info "Install composer"
