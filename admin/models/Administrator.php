@@ -3,7 +3,6 @@
 namespace admin\models;
 
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
 
@@ -30,6 +29,7 @@ use yii\web\IdentityInterface;
  */
 class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
 {
+
     const STATUS_DELETED = 1;
     const STATUS_ACTIVE = 0;
 
@@ -78,26 +78,25 @@ class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'id'),
-            'email' => Yii::t('app', 'email'),
-            'username' => Yii::t('app', 'username'),
-            'auth_key' => Yii::t('app', 'auth_key'),
-            'prefix' => Yii::t('app', 'prefix'),
-            'first_name' => Yii::t('app', 'first_name'),
-            'middle_name' => Yii::t('app', 'middle_name'),
-            'last_name' => Yii::t('app', 'last_name'),
-            'cell_phone' => Yii::t('app', 'cell_phone'),
-            'birth_date' => Yii::t('app', 'birth_date'),
-            'profile_picture' => Yii::t('app', 'profile_picture'),
-            'gender' => Yii::t('app', 'gender'),
-            'password_hash' => Yii::t('app', 'password_hash'),
-            'password_reset_token' => Yii::t('app', 'password_reset_token'),
-            'isDeleted' => Yii::t('app', 'isDeleted'),
-            'created_at' => Yii::t('app', 'created_at'),
-            'updated_at' => Yii::t('app', 'updated_at'),
+            'id' => 'ID',
+            'email' => 'Email',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'prefix' => 'Prefix',
+            'first_name' => 'First Name',
+            'middle_name' => 'Middle Name',
+            'last_name' => 'Last Name',
+            'cell_phone' => 'Cell Phone',
+            'birth_date' => 'Birth Date',
+            'profile_picture' => 'Profile Picture',
+            'gender' => 'Gender',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'isDeleted' => 'Is Deleted',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
-
     /**
      * Finds an identity by the given ID.
      * @param string|int $id the ID to be looked for
