@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "master_topic".
@@ -17,6 +19,20 @@ use Yii;
  */
 class Topic extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return
+        [
+            TimestampBehavior::className(),
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'isDeleted' => true
+                ],
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,7 +47,7 @@ class Topic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['topic_name', 'created_at', 'updated_at'], 'required'],
+            [['topic_name'], 'required'],
             [['created_at', 'updated_at', 'isDeleted'], 'integer'],
             [['topic_name'], 'string', 'max' => 255],
         ];
@@ -57,5 +73,10 @@ class Topic extends \yii\db\ActiveRecord
     public function getEvents()
     {
         return $this->hasMany(Event::className(), ['topic' => 'id']);
+    }
+
+    public static function findByName($topic_name)
+    {
+        return self::find()->where(['topic_name' => $topic_name]);
     }
 }

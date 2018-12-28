@@ -161,6 +161,13 @@ class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->getPrimaryKey();
     }
 
+    public function getFullName(){
+        return $this->first_name ." ".$this->middle_name." ".$this->last_name;
+    }
+    public function getFullNameWithPrefix(){
+        return $this->prefix.". ".$this->getFullName();
+    }
+
     private static function isPasswordResetTokenValid($token)
     {
         if (empty($token)) {

@@ -2,52 +2,75 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Beranda | Event-Hub';
+$year = date('Y');
 ?>
-<div class="site-index">
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="row">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+    <div class="col-lg-3 col-md-6">
+        <div class="card-box widget-user">
+            <div class="text-center">
+                <h2 class="text-warning" data-plugin="counterup">3</h2>
+                <h5>Jumlah Desa</h5>
             </div>
         </div>
+    </div>
 
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card-box widget-user">
+            <div class="text-center">
+                <h2 class="text-custom" data-plugin="counterup">400</h2>
+                <h5>Jumlah Kelurahan</h5>
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card-box widget-user">
+            <div class="text-center">
+                <h2 class="text-success" data-plugin="counterup">800</h2>
+                <h5>Penilaian Desa Tahun <?= date('Y') ?></h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card-box widget-user">
+            <div class="text-center">
+                <h2 class="text-danger" data-plugin="counterup">3000</h2>
+                <h5>Penilaian Kelurahan Tahun <?= date('Y') ?></h5>
+            </div>
+        </div>
     </div>
 </div>
+<!-- end row -->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+
+            <h4 class="header-title m-t-0 m-b-30">Selamat datang di Backend SISTEM INFORMASI PENILAIAN DESA DAN KELURAHAN.</h4>
+            <h5 class="text-capitalize">Visi</h5>
+            <pre>Terwujudnya Pemberdayaan Masyarakat, Pemerintahan dan Pembangunan Desa/Kelurahan menuju Kemandirian Desa/Kelurahan"</pre>
+            <h5 class="text-capitalize">Misi</h5>
+            <pre>1.	Peningkatan dan Pemantapan Perencanaan Program, Pengelolaan Keuangan, Perlengkapan serta Kepegawaian dan Umum
+2.	Peningkatan dan Pemantapan Pemberdayaan Masyarakat Desa, Kelurahan serta Sosial Budaya dan Komunitas Adat.
+3.	Peningkatan dan Pemantapan Permbedayaan Masyarakat Desa/Kelurahan dan Pengembangan Kapasitas, pengelolaan Keuangan dan Aset Desa.
+4.	Peningkatan dan Pemantapan Pembangunan Infrastruktur dasar sarana prasarana, resetlemtn, perumahan masyarakat miskin, dan Ekonomi Masyarakat Desa dan Kelurahan.
+5.	Peningkatan dan Pemantapan Analisa Kebutuhan serta Permasyarakatan Teknologi Tepat Guna.
+</pre>
+
+
+        </div>
+    </div><!-- end col -->
+
+</div>
+<!-- end row -->
+

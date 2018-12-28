@@ -6,7 +6,6 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
 
 /**
  * Site controller
@@ -54,6 +53,16 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action) {
+        if (parent::beforeAction($action)) {
+            // change layout for error action
+            if ($action->id=='error') $this->layout ='main-not-found';
+            if($action->id=='login') $this->layout='main-login';
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * Displays homepage.
      *

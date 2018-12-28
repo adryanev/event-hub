@@ -9,6 +9,7 @@ end
 domains = {
   frontend: 'event-hub.test',
   admin:  'admin.event-hub.test',
+  organizer:  'organizer.event-hub.test',
   api:  'api.event-hub.test'
 }
 
@@ -74,5 +75,5 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', path: './vagrant/provision/always-as-root.sh', run: 'always'
 
   # post-install message (vagrant console)
-  config.vm.post_up_message = "Frontend URL: http://#{domains[:frontend]}\nAdmin URL: http://#{domains[:admin]}\nApi Url: http://#{domains[:api]}"
+  config.vm.post_up_message = "Frontend URL: http://#{domains[:frontend]}\nAdmin URL: http://#{domains[:admin]}\nOrganizer URL: http://#{domains[:organizer]}\nApi Url: http://#{domains[:api]}"
 end

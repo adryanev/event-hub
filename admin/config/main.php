@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-admin',
+    'name'=> 'Event-Hub Admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'admin\controllers',
     'bootstrap' => ['log'],
@@ -49,6 +50,28 @@ return [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js'=>['js/jquery.min.js']
+                ],
+
             ],
+        ],
+        'formatter' => [
+
+            'datetimeFormat' => 'php:d M Y H:i:s',
+
+            'decimalSeparator' => ',',
+
+            'thousandSeparator' => '.',
+
+            'currencyCode' => 'Rp',
+
+        ],
+    ],
+
     'params' => $params,
 ];
