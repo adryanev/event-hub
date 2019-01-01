@@ -51,9 +51,9 @@ $controllerName = substr($route,0,strpos($route,'/'));
                     [
                         'items' => [
                             ['label'=>'Beranda', 'icon'=>'zmdi-view-dashboard','url'=>['/site'],'template'=>$controllerName === 'site'? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
-                            ['label'=>'Wilayah', 'icon'=>'zmdi-map','url'=>['/wilayah'],'template'=>$controllerName === 'wilayah' || $controllerName === 'provinsi' || $controllerName === 'kabupaten' || $controllerName == 'kecamatan' || $controllerName === 'kelurahan' || $controllerName === 'desa'? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
-                            ['label'=>'Laporan', 'icon'=>'zmdi-file-text','url'=>['/laporan'],'template'=>$controllerName === 'laporan'? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
-                            ['label'=>'Penilai', 'icon'=>'zmdi-accounts','url'=>['/user'],'template'=>$controllerName === 'user' ? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
+                            ['label'=>'Topik', 'icon'=>'zmdi-map','url'=>['/topic'],'template'=>$controllerName === 'topic' ? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
+                            ['label'=>'Bank', 'icon'=>'zmdi-file-text','url'=>['/bank'],'template'=>$controllerName === 'bank'? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
+                            ['label'=>'Type', 'icon'=>'zmdi-accounts','url'=>['/type'],'template'=>$controllerName === 'type' ? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
                             ['label'=>'Admin', 'icon'=>'zmdi-account','url'=>['/admin'],'template'=>$controllerName === 'admin'? '<a href="{url}" class="waves-effect active">{icon} {label}</a>': '<a href="{url}" class="waves-effect">{icon} {label}</a>'],
 
                         ]

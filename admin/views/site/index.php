@@ -14,7 +14,7 @@ $year = date('Y');
         <div class="card-box widget-user">
             <div class="text-center">
                 <h2 class="text-warning" data-plugin="counterup">3</h2>
-                <h5>Jumlah Desa</h5>
+                <h5>Total Event</h5>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@ $year = date('Y');
         <div class="card-box widget-user">
             <div class="text-center">
                 <h2 class="text-custom" data-plugin="counterup">400</h2>
-                <h5>Jumlah Kelurahan</h5>
+                <h5>Total Organizer</h5>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@ $year = date('Y');
         <div class="card-box widget-user">
             <div class="text-center">
                 <h2 class="text-success" data-plugin="counterup">800</h2>
-                <h5>Penilaian Desa Tahun <?= date('Y') ?></h5>
+                <h5>Total Pengguna <?= date('Y') ?></h5>
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@ $year = date('Y');
         <div class="card-box widget-user">
             <div class="text-center">
                 <h2 class="text-danger" data-plugin="counterup">3000</h2>
-                <h5>Penilaian Kelurahan Tahun <?= date('Y') ?></h5>
+                <h5>Total Unduhan Aplikasi <?= date('Y') ?></h5>
             </div>
         </div>
     </div>

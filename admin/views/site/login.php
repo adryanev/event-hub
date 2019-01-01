@@ -23,8 +23,8 @@ $fieldOptions2 = [
 <div class="clearfix"></div>
 <div class="wrapper-page">
     <div class="text-center">
-        <a href="<?=Yii::$app->urlManager->getBaseUrl()?>" class="logo"><span>Penilaian<span> DesKel</span></span></a>
-        <h5 class="text-muted m-t-0 font-600">Dinas Pemberdayaan Masyarakat dan Desa Provinsi Riau</h5>
+        <a href="<?=Yii::$app->urlManager->getBaseUrl()?>" class="logo"><span>Event-Hub<span> Admin</span></span></a>
+        <h5 class="text-muted m-t-0 font-600">Admin Dashboard Aplikasi Event-Hub</h5>
     </div>
     <div class="m-t-40 card-box">
         <div class="panel-body">
