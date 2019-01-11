@@ -16,33 +16,33 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-box">
             <div class="card-content">
                 <h4 class="header-title m-t-0 m-b-30"><?= Html::encode($this->title) ?></h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                                                                                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-                            
-                            <p>
-                                <?= Html::a('Tambah Topic', ['create'], ['class' => 'btn btn-success waves-effect waves-light']) ?>
-                            </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-                                                            <?= GridView::widget([
-                                'dataProvider' => $dataProvider,
-                                'filterModel' => $searchModel,
-        'columns' => [
-                                ['class' => 'yii\grid\SerialColumn','header'=>'No'],
+                        <p>
+                            <?= Html::a('Tambah Topic', ['create'], ['class' => 'btn btn-success waves-effect waves-light']) ?>
+                        </p>
 
-                                            'id',
-            'topic_name',
-            'created_at:date',
-            'updated_at:date',
-            'isDeleted',
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'filterModel' => $searchModel,
+                            'columns' => [
+                                ['class' => 'yii\grid\SerialColumn', 'header' => 'No'],
 
-                                ['class' => 'yii\grid\ActionColumn','header'=>'Aksi'],
-                                ],
-                                ]); ?>
-                                                        
+                                //'id',
+                                'topic_name',
+                                //'created_at:date',
+                               // 'updated_at:date',
+                               // 'isDeleted',
 
-                        </div>
+                                ['class' => 'yii\grid\ActionColumn', 'header' => 'Aksi'],
+                            ],
+                        ]); ?>
+
+
                     </div>
+                </div>
             </div>
         </div>
     </div>

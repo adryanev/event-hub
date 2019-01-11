@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "event".
@@ -36,13 +38,27 @@ use Yii;
  * @property int $created_at
  * @property int $updated_at
  *
- * @property MasterEventStatus $eventStatus
- * @property MasterTopic $topic0
- * @property MasterType $type0
+ * @property EventStatus $eventStatus
+ * @property Topic $topic0
+ * @property Type $type0
  * @property Ticketing[] $ticketings
  */
 class Event extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return
+            [
+                TimestampBehavior::className(),
+                'softDeleteBehavior' => [
+                    'class' => SoftDeleteBehavior::className(),
+                    'softDeleteAttributeValues' => [
+                        'isDeleted' => true
+                    ],
+                ],
+            ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -65,9 +81,9 @@ class Event extends \yii\db\ActiveRecord
             [['country', 'province', 'city'], 'string', 'max' => 32],
             [['start_date', 'end_date'], 'string', 'max' => 10],
             [['start_time', 'end_time', 'publishing_type'], 'string', 'max' => 8],
-            [['event_status'], 'exist', 'skipOnError' => true, 'targetClass' => MasterEventStatus::className(), 'targetAttribute' => ['event_status' => 'id']],
-            [['topic'], 'exist', 'skipOnError' => true, 'targetClass' => MasterTopic::className(), 'targetAttribute' => ['topic' => 'id']],
-            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => MasterType::className(), 'targetAttribute' => ['type' => 'id']],
+            [['event_status'], 'exist', 'skipOnError' => true, 'targetClass' => EventStatus::className(), 'targetAttribute' => ['event_status' => 'id']],
+            [['topic'], 'exist', 'skipOnError' => true, 'targetClass' => Topic::className(), 'targetAttribute' => ['topic' => 'id']],
+            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type' => 'id']],
         ];
     }
 
@@ -113,7 +129,7 @@ class Event extends \yii\db\ActiveRecord
      */
     public function getEventStatus()
     {
-        return $this->hasOne(MasterEventStatus::className(), ['id' => 'event_status']);
+        return $this->hasOne(EventStatus::className(), ['id' => 'event_status']);
     }
 
     /**
@@ -121,7 +137,7 @@ class Event extends \yii\db\ActiveRecord
      */
     public function getTopic0()
     {
-        return $this->hasOne(MasterTopic::className(), ['id' => 'topic']);
+        return $this->hasOne(Topic::className(), ['id' => 'topic']);
     }
 
     /**
@@ -129,7 +145,7 @@ class Event extends \yii\db\ActiveRecord
      */
     public function getType0()
     {
-        return $this->hasOne(MasterType::className(), ['id' => 'type']);
+        return $this->hasOne(Type::className(), ['id' => 'type']);
     }
 
     /**

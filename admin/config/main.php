@@ -62,7 +62,7 @@ return [
         ],
         'formatter' => [
 
-            'datetimeFormat' => 'php:d M Y H:i:s',
+            'datetimeFormat' => 'php:l, d F Y H:i',
 
             'decimalSeparator' => ',',
 

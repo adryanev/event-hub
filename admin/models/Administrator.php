@@ -2,9 +2,12 @@
 
 namespace admin\models;
 
+use common\models\StatusKonten;
 use Yii;
+use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "administrator".
@@ -30,16 +33,19 @@ use yii\web\IdentityInterface;
 class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
 {
 
-    const STATUS_DELETED = 1;
-    const STATUS_ACTIVE = 0;
-
-
 
     public function behaviors()
     {
-        return [
-            TimestampBehavior::className(),
-        ];
+        return
+            [
+                TimestampBehavior::className(),
+                'softDeleteBehavior' => [
+                    'class' => SoftDeleteBehavior::className(),
+                    'softDeleteAttributeValues' => [
+                        'isDeleted' => true
+                    ],
+                ],
+            ];
     }
     /**
      * {@inheritdoc}
@@ -67,8 +73,8 @@ class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
             [['email'], 'unique'],
             [['username'], 'unique'],
             [['password_reset_token'], 'unique'],
-            ['isDeleted', 'default', 'value' => self::STATUS_ACTIVE],
-            ['isDeleted', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['isDeleted', 'default', 'value' => StatusKonten::STATUS_ACTIVE],
+            ['isDeleted', 'in', 'range' => [StatusKonten::STATUS_ACTIVE, StatusKonten::STATUS_DELETED]],
         ];
     }
 
@@ -106,7 +112,7 @@ class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'isDeleted' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'isDeleted' => StatusKonten::STATUS_ACTIVE]);
     }
 
     /**
@@ -131,7 +137,7 @@ class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'isDeleted' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'isDeleted' => StatusKonten::STATUS_ACTIVE]);
     }
 
     /**
@@ -148,7 +154,7 @@ class Administrator extends \yii\db\ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'isDeleted' => self::STATUS_ACTIVE,
+            'isDeleted' => StatusKonten::STATUS_ACTIVE,
         ]);
     }
 

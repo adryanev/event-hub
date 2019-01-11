@@ -21,7 +21,8 @@
         "ext-json": "*",
         "nullref/yii2-datatables": "^1.0",
         "yii2tech/ar-softdelete": "^1.0",
-        "yii2mod/yii2-sweet-alert": "*"
+        "yii2mod/yii2-sweet-alert": "*",
+        "nesbot/carbon": "^2.10"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

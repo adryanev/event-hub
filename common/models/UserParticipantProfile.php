@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "user_participant_profile".
@@ -27,12 +29,26 @@ use Yii;
  * @property string $bank_account
  * @property int $created_at
  * @property int $updated_at
+ * @property int $isDeleted
  *
  * @property UserParticipant $user
  * @property Bank $bankName
  */
 class UserParticipantProfile extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return
+            [
+                TimestampBehavior::className(),
+                'softDeleteBehavior' => [
+                    'class' => SoftDeleteBehavior::className(),
+                    'softDeleteAttributeValues' => [
+                        'isDeleted' => true
+                    ],
+                ],
+            ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -47,7 +63,7 @@ class UserParticipantProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'bank_name', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'bank_name', 'created_at', 'updated_at', 'isDeleted'], 'integer'],
             [['first_name', 'last_name', 'cell_phone', 'address_1', 'country', 'province', 'city', 'postal_code', 'profile_picture', 'created_at', 'updated_at'], 'required'],
             [['prefix'], 'string', 'max' => 3],
             [['first_name', 'middle_name', 'last_name', 'cell_phone'], 'string', 'max' => 16],
@@ -89,6 +105,7 @@ class UserParticipantProfile extends \yii\db\ActiveRecord
             'bank_account' => 'Bank Account',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'isDeleted' => 'Is Deleted',
         ];
     }
 

@@ -21,7 +21,7 @@ if($controllerName == 'site'){
 
         <!-- LOGO -->
         <div class="topbar-left">
-            <a href="<?=Yii::$app->urlManager->getBaseUrl()?>" class="logo"><span>Penilaian<span>DesKel</span></span><i class="zmdi zmdi-layers"></i></a>
+            <a href="<?=Yii::$app->urlManager->getBaseUrl()?>" class="logo"><span>Beranda<span>Admin</span></span><i class="zmdi zmdi-layers"></i></a>
         </div>
 
         <!-- Button mobile view to collapse sidebar menu -->

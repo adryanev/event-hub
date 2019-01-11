@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "event_participant".
@@ -19,6 +21,20 @@ use Yii;
  */
 class EventParticipant extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return
+            [
+                TimestampBehavior::className(),
+                'softDeleteBehavior' => [
+                    'class' => SoftDeleteBehavior::className(),
+                    'softDeleteAttributeValues' => [
+                        'isDeleted' => true
+                    ],
+                ],
+            ];
+    }
     /**
      * {@inheritdoc}
      */

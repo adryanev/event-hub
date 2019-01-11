@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Topic */
 
-$this->title = 'Update Topic: {nameAttribute}';
+$this->title = "Update Topic: $model->topic_name";
 $this->params['breadcrumbs'][] = ['label' => 'Topic', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->topic_name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="topic-update">

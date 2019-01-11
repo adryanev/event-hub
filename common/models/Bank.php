@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "master_bank".
@@ -19,6 +21,20 @@ use Yii;
  */
 class Bank extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return
+            [
+                TimestampBehavior::className(),
+                'softDeleteBehavior' => [
+                    'class' => SoftDeleteBehavior::className(),
+                    'softDeleteAttributeValues' => [
+                        'isDeleted' => true
+                    ],
+                ],
+            ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -33,7 +49,7 @@ class Bank extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'code', 'created_at', 'updated_at'], 'required'],
+            [['name', 'code'], 'required'],
             [['isDeleted', 'created_at', 'updated_at'], 'integer'],
             [['name', 'code'], 'string', 'max' => 255],
         ];

@@ -3,6 +3,8 @@
 namespace admin\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "application_api".
@@ -17,6 +19,22 @@ use Yii;
  */
 class ApplicationApi extends \yii\db\ActiveRecord
 {
+
+
+    public function behaviors()
+    {
+        return
+            [
+                TimestampBehavior::className(),
+                'softDeleteBehavior' => [
+                    'class' => SoftDeleteBehavior::className(),
+                    'softDeleteAttributeValues' => [
+                        'isDeleted' => true
+                    ],
+                ],
+            ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,7 +49,7 @@ class ApplicationApi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'token', 'created_at', 'updated_at'], 'required'],
+            [['name', 'description', 'token'], 'required'],
             [['created_at', 'updated_at', 'isDeleted'], 'integer'],
             [['name', 'description'], 'string', 'max' => 255],
             [['token'], 'string', 'max' => 32],
