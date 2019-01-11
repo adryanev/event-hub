@@ -39,10 +39,17 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                    // Create API log in the standard log dir
-                    // But in file 'api.log':
-                    //'logFile' => '@app/runtime/logs/api.log',
+                    'levels' => ['error','warning'],
+                    'logFile' => '@runtime/logs/'.date('Y').'/'.date('m').'/debug-'.date('Y-m-d').'.log',
+                    'logVars' => ['_GET','_POST','_SERVER.COMPUTERNAME'],
+                    'categories' => [],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'logFile' => '@runtime/logs/'.date('Y').'/'.date('m').'/access-'.date('Y-m-d').'.log',
+                    'logVars' => ['_SERVER.COMPUTERNAME','_SERVER.USERNAME'],
+                    'categories' => ['application'],
                 ],
             ],
         ],
@@ -57,8 +64,11 @@ $config = [
         ],
         'db' => $db['components']['db'],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'class'=>'yii\web\User',
+            'identityClass' => 'api\models\ApiIdentity',
             'enableAutoLogin' => false,
+            'enableSession'=>false,
+            'loginUrl'=>null
         ],
     ],
     'modules' => [

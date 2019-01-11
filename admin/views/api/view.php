@@ -22,25 +22,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p>
                                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary waves-effect waves-light']) ?>
                                 <?= Html::a('Hapus', ['delete', 'id' => $model->id], [
-                                'class' => 'btn btn-danger waves-effect waves-light',
-                                'data' => [
-                                'confirm' => 'Anda yakin untuk menghapus item ini?',
-                                'method' => 'post',
-                                ],
+                                    'class' => 'btn btn-danger waves-effect waves-light',
+                                    'data' => [
+                                        'confirm' => 'Anda yakin untuk menghapus item ini?',
+                                        'method' => 'post',
+                                    ],
                                 ]) ?>
                             </p>
 
                             <?= DetailView::widget([
-                            'model' => $model,
-                            'attributes' => [
-                                        'id',
-            'name',
-            'description',
-            'token',
-            'created_at',
-            'updated_at',
-            'isDeleted',
-                            ],
+                                'model' => $model,
+                                'attributes' => [
+                                    'id',
+                                    'name',
+                                    'description',
+                                    'token',
+                                    'created_at:datetime',
+                                    'updated_at:datetime',
+                                    'isDeleted:boolean',
+                                ],
                             ]) ?>
                         </div>
                     </div>
@@ -48,8 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
-
 
 
 </div>

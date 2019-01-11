@@ -26,7 +26,10 @@ class ApiAuth extends \yii\filters\auth\AuthMethod
      */
     public function authenticate($user, $request, $response)
     {
-        $accessToken = $request->getAuthUser();
+        \Yii::debug("AccessToken");
+
+        $accessToken = $request->getHeaders()->get('Authorization');
+
         if(empty($accessToken)){
             return null;
         }

@@ -63,7 +63,7 @@ class AppIdentity extends Model implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        $app = ApplicationApi::findOne(['id'=>$id,'isDeleted'=>StatusKonten::STATUS_ACTIVE]);
+        $app = ApplicationApi::find()->where(['id'=>$id,'isDeleted'=>StatusKonten::STATUS_ACTIVE])->one();
         if(is_null($app)){
             return null;
         }
@@ -83,7 +83,7 @@ class AppIdentity extends Model implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        $app = ApplicationApi::findOne(['token'=>$token,'isDeleted'=>StatusKonten::STATUS_ACTIVE]);
+        $app = ApplicationApi::find()->where(['token'=>$token,'isDeleted'=>StatusKonten::STATUS_ACTIVE])->one();
         if(is_null($app)){
             return null;
         }
