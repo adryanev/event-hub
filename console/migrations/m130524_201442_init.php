@@ -27,9 +27,9 @@ class m130524_201442_init extends Migration
             'gender'=>$this->string(1),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ],$tableOptions);
         $this->createTable('{{%user_participant}}', [
             'id' => $this->primaryKey(),
@@ -37,9 +37,9 @@ class m130524_201442_init extends Migration
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
         $this->createTable('{{%user_participant_token}}',[
             'id'=>$this->primaryKey(),
@@ -48,9 +48,9 @@ class m130524_201442_init extends Migration
             'decoded_data'=>$this->text()->notNull(),
             'provider'=>$this->string()->notNull(),
             'token'=>$this->string(64)->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at' => $this->integer(),
         ],$tableOptions);
         $this->createTable('{{%user_participant_profile}}',[
             'id'=>$this->primaryKey(),
@@ -71,24 +71,24 @@ class m130524_201442_init extends Migration
             'gender'=>$this->string(1),
             'bank_name'=>$this->integer(),
             'bank_account'=>$this->string(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at'=>$this->integer(),
+            'updated_at' => $this->integer(),
         ],$tableOptions);
 
         $this->createTable('{{%master_bank}}',[
             'id'=>$this->primaryKey(),
             'name'=>$this->string()->notNull(),
             'code'=>$this->string()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at' => $this->integer(),
         ],$tableOptions);
         $this->createTable('{{%master_organization}}',[
             'id'=>$this->primaryKey(),
             'name'=>$this->string()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at' => $this->integer(),
         ],$tableOptions);
         $this->createTable('{{%user_organizer}}',[
             'id'=> $this->primaryKey(),
@@ -115,18 +115,18 @@ class m130524_201442_init extends Migration
             'website'=>$this->string(),
             'bank_name'=>$this->integer(),
             'bank_account'=>$this->string(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
         $this->createTable('{{%organizer_verification}}',[
             'id'=>$this->primaryKey(),
             'id_organizer'=>$this->integer()->notNull(),
             'verification_file'=>$this->string()->notNull(),
             'verification_status'=>$this->boolean(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
         $this->createTable('{{%event}}',[
             'id'=>$this->primaryKey(),
@@ -154,16 +154,16 @@ class m130524_201442_init extends Migration
             'facebook_link'=>$this->string(),
             'twitter_link'=>$this->string(),
             'event_status'=>$this->integer(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
         $this->createTable('{{%master_event_status}}',[
             'id'=>$this->primaryKey(),
             'name'=>$this->string()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
         $this->createTable('{{%ticketing}}',[
             'id'=>$this->primaryKey(),
@@ -172,9 +172,9 @@ class m130524_201442_init extends Migration
             'quantity'=>$this->integer(),
             'price'=>$this->bigInteger(),
             'ticket_type'=>$this->integer(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
         $this->createTable('{{%transaction}}',[
             'id'=>$this->primaryKey(),
@@ -184,56 +184,56 @@ class m130524_201442_init extends Migration
             'status'=>$this->string()->notNull(),
             'expiration'=>$this->string()->notNull(),
             'total_price'=>$this->float()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
         $this->createTable('{{%transaction_detail}}',[
             'id'=>$this->primaryKey(),
             'id_transaction'=>$this->integer(),
             'id_ticket'=>$this->integer(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%master_payment_method}}',[
             'id'=>$this->primaryKey(),
             'name'=>$this->string()->notNull(),
             'created_at'=>$this->integer()->notNull(),
             'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%user_subscription}}',[
             'id'=>$this->primaryKey(),
             'id_user'=>$this->integer(),
             'id_organizer'=>$this->integer()->notNull(),
             'notification'=>$this->boolean()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%hub_wallet_user}}',[
             'id'=>$this->primaryKey(),
             'id_user'=>$this->integer()->notNull(),
             'balance'=>$this->double()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%hub_wallet_organizer}}',[
             'id'=>$this->primaryKey(),
             'id_organizer'=>$this->integer()->notNull(),
             'balance'=>$this->double()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%event_participant}}',[
             'id'=>$this->primaryKey(),
             'id_transaction'=>$this->integer()->notNull(),
             'id_user'=>$this->integer()->notNull(),
             'is_present'=> $this->boolean()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%feedback}}',[
             'id'=>$this->primaryKey(),
@@ -241,17 +241,17 @@ class m130524_201442_init extends Migration
             'id_user'=>$this->integer()->notNull(),
             'rating_point'=>$this->float(),
             'message'=>$this->text(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%prefered_topic}}',[
             'id'=>$this->primaryKey(),
             'id_user'=>$this->integer()->notNull(),
             'id_topic'=>$this->integer()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%android_active_user}}',[
             'id'=>$this->primaryKey(),
@@ -270,9 +270,9 @@ class m130524_201442_init extends Migration
             'amount'=>$this->double()->notNull(),
             'is_success'=>$this->boolean()->notNull(),
             'comment'=>$this->text()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%money_ticket_transaction}}',[
             'id'=>$this->primaryKey(),
@@ -281,9 +281,9 @@ class m130524_201442_init extends Migration
             'amount'=>$this->double()->notNull(),
             'via'=>$this->string()->notNull(),
             'is_success'=>$this->boolean()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%money_redeem_transaction}}',[
             'id'=>$this->primaryKey(),
@@ -291,32 +291,32 @@ class m130524_201442_init extends Migration
             'amount'=>$this->double()->notNull(),
             'is_success'=>$this->boolean()->notNull(),
             'comment'=>$this->text()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%master_topic}}',[
             'id'=>$this->primaryKey(),
             'topic_name'=>$this->string()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%master_type}}',[
             'id'=>$this->primaryKey(),
             'type_name'=>$this->string()->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
         $this->createTable('{{%application_api}}',[
             'id'=>$this->primaryKey(),
             'name'=>$this->string()->notNull(),
             'description'=>$this->string()->notNull(),
             'token'=>$this->string(32)->notNull(),
-            'created_at'=>$this->integer()->notNull(),
-            'updated_at'=>$this->integer()->notNull(),
-            'isDeleted' => $this->boolean()->notNull()->defaultValue(0),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
+            'isDeleted' => $this->boolean()->defaultValue(0),
         ],$tableOptions);
 
         //indexing
