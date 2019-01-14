@@ -1,7 +1,10 @@
 <?php
 namespace organizer\controllers;
 
+use common\models\StatusKonten;
+use common\models\UserOrganizer;
 use organizer\models\OrganizerLoginForm;
+use organizer\models\OrganizerSignupForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -22,7 +25,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'signup', 'error'],
                         'allow' => true,
                     ],
                     [
@@ -41,6 +44,17 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action) {
+        if (parent::beforeAction($action)) {
+            // change layout for error action
+            if ($action->id=='error') $this->layout ='main-not-found';
+            if($action->id=='login' || 'signup') $this->layout='main-login';
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -49,6 +63,10 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -97,4 +115,41 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+    public function actionSignup(){
+        $this->layout = 'main-login';
+
+        $model = new OrganizerSignupForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+               $mail = Yii::$app->mailer->compose('signup-confirmation',['user'=>$user])
+                   ->setTo($user->email)
+                   ->setFrom([\Yii::$app->params['noReplyEmail'] => \Yii::$app->name . ' robot'])
+                   ->setSubject("Signup Confirmation")
+                   ->send();
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+
+    }
+
+    public function actionConfirmAccount($id,$key){
+        $user = UserOrganizer::findOne(['id'=>$id, 'auth_key'=>$key,'isDeleted'=>StatusKonten::STATUS_ACTIVE]);
+        if(!is_null($user) || !empty($user)){
+            $user->isDeleted = StatusKonten::STATUS_ACTIVE;
+            $user->save();
+            Yii::$app->session->setFlash('success',"Selamat akun anda berhasi di konfirmasi");
+
+        }
+        else{
+            Yii::$app->getSession()->setFlash('warning','Gagal Konfirmasi Akun!');
+        }
+        return $this->render('site/activated');
+    }
+
+
 }

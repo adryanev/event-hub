@@ -5,7 +5,7 @@ $params = array_merge(
     require __DIR__ . '/params.php',
     require __DIR__ . '/params-local.php'
 );
-
+$ini = parse_ini_file(__DIR__ . '/../../keys.ini');
 return [
     'id' => 'app-organizer',
     'basePath' => dirname(__DIR__),
@@ -13,6 +13,12 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => $ini['recaptcha_site_key'],
+            'secret' => $ini['recaptcha_secret_key'],
+        ],
         'request' => [
             'csrfParam' => '_csrf-organizer',
         ],
@@ -48,6 +54,27 @@ return [
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js'=>['js/jquery.min.js']
+                ],
+
+            ],
+        ],
+        'formatter' => [
+
+            'datetimeFormat' => 'php:l, d F Y H:i',
+
+            'decimalSeparator' => ',',
+
+            'thousandSeparator' => '.',
+
+            'currencyCode' => 'Rp',
+
         ],
             ],
     'params' => $params,

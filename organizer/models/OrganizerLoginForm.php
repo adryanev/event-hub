@@ -66,7 +66,7 @@ class OrganizerLoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return Administrator|null
+     * @return UserOrganizer|null
      */
     protected function getUser()
     {
