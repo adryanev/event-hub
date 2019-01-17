@@ -21,6 +21,7 @@ $fieldOptions2 = [
     'options' => ['class' => 'form-group has-feedback'],
     'inputTemplate' => "<span class='zmdi zmdi-lock form-control-feedback'></span>{input}"
 ];
+$this->title = 'Signup Organizer'
 ?>
 
 
@@ -33,8 +34,6 @@ $fieldOptions2 = [
     </div>
     <div class="m-t-40 card-box">
         <div class="panel-body">
-            <h1><?= Html::encode($this->title) ?></h1>
-            <?php echo Alert::widget(['useSessionFlash'=>true])?>
 
             <?php $form = ActiveForm::begin(['id' => 'signup-form']); ?>
 
@@ -53,11 +52,11 @@ $fieldOptions2 = [
                 ->label(false)
                 ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
-            <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className())->label('') ?>
+            <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::class)->label('') ?>
 
 
             <div class="form-group">
-                <?= Html::submitButton('Signup', ['class'=>['btn btn-primary waves-effect waves-light btn-bordred col-xs-12'], 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Signup', ['class'=>['btn btn-primary waves-effect waves-light btn-bordred col-xs-12'], 'name' => 'signup-button']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

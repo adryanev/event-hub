@@ -1,11 +1,14 @@
 <?php
 namespace organizer\controllers;
 
+use common\models\Organization;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
 use organizer\models\OrganizerLoginForm;
 use organizer\models\OrganizerSignupForm;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -78,6 +81,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if(!Yii::$app->user->identity->isVerified()){
+
+            return $this->redirect(['account/organizer-verification']);
+        }
         return $this->render('index');
     }
 
@@ -118,38 +125,34 @@ class SiteController extends Controller
 
     public function actionSignup(){
         $this->layout = 'main-login';
+        Yii::debug('Membuat model signup');
 
         $model = new OrganizerSignupForm();
+        $organization = Organization::findAll([
+            'isDeleted'=>StatusKonten::STATUS_ACTIVE
+        ]);
+
+        $dataOrg = ArrayHelper::map($organization,'id','name');
 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-               $mail = Yii::$app->mailer->compose('signup-confirmation',['user'=>$user])
+               $mail = Yii::$app->mailer->compose('organizerEmailVerification-html',['user'=>$user])
                    ->setTo($user->email)
                    ->setFrom([\Yii::$app->params['noReplyEmail'] => \Yii::$app->name . ' robot'])
                    ->setSubject("Signup Confirmation")
                    ->send();
+
+               return $this->render('check-email',['user'=>$user]);
             }
         }
 
         return $this->render('signup', [
             'model' => $model,
+            'organization'=>$dataOrg
         ]);
 
     }
 
-    public function actionConfirmAccount($id,$key){
-        $user = UserOrganizer::findOne(['id'=>$id, 'auth_key'=>$key,'isDeleted'=>StatusKonten::STATUS_ACTIVE]);
-        if(!is_null($user) || !empty($user)){
-            $user->isDeleted = StatusKonten::STATUS_ACTIVE;
-            $user->save();
-            Yii::$app->session->setFlash('success',"Selamat akun anda berhasi di konfirmasi");
-
-        }
-        else{
-            Yii::$app->getSession()->setFlash('warning','Gagal Konfirmasi Akun!');
-        }
-        return $this->render('site/activated');
-    }
 
 
 }

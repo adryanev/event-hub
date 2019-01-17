@@ -8,6 +8,7 @@ $params = array_merge(
 $ini = parse_ini_file(__DIR__ . '/../../keys.ini');
 return [
     'id' => 'app-organizer',
+    'name'=> 'Event-Hub Organizer',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'organizer\controllers',
     'bootstrap' => ['log'],
@@ -15,7 +16,7 @@ return [
     'components' => [
         'reCaptcha' => [
             'name' => 'reCaptcha',
-            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'class' => \himiklab\yii2\recaptcha\ReCaptcha::class,
             'siteKey' => $ini['recaptcha_site_key'],
             'secret' => $ini['recaptcha_secret_key'],
         ],

@@ -19,6 +19,8 @@ class OrganizerSignupForm extends Model
     public $email;
     public $password;
     public $name;
+//    public $organization;
+    public $reCaptcha;
 
     private $_organizer;
 
@@ -36,7 +38,10 @@ class OrganizerSignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
-            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'uncheckedMessage' => 'Please confirm that you are not a bot.']
+            ['reCaptcha', \himiklab\yii2\recaptcha\ReCaptchaValidator::class, 'uncheckedMessage' => 'Please confirm that you are not a bot.'],
+//            ['organization', 'required'],
+//            ['organization', 'integer'],
+
         ];
     }
 
@@ -44,14 +49,29 @@ class OrganizerSignupForm extends Model
     public function signup(){
         if (!$this->validate()) return null;
 
-        $organizer = new UserOrganizer();
+        \Yii::debug('Validasi model berhasil',__METHOD__);
+        $organizer = new UserOrganizer(['scenario'=>UserOrganizer::SCENARIO_SIGNUP]);
         $organizer->name = $this->name;
         $organizer->email = $this->email;
         $organizer->isDeleted = StatusKonten::STATUS_DELETED;
+        $organizer->isVerified = StatusKonten::STATUS_NOT_VERIFIED;
+        $organizer->profile_picture = 'organizer.png';
         $organizer->generateAuthKey();
         $organizer->setPassword($this->password);
-
+        \Yii::debug($organizer,__METHOD__);
         return $organizer->save() ? $organizer : null;
+
+    }
+
+    public function attributeLabels()
+
+    {
+
+        return [
+
+            'reCaptcha' => '',
+
+        ];
 
     }
 

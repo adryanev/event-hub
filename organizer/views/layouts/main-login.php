@@ -9,6 +9,8 @@
 
 use organizer\assets\AppAsset;
 use yii\helpers\Html;
+use yii2mod\alert\Alert;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -23,6 +25,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?php echo Alert::widget(['useSessionFlash'=>true])?>
 
 
 <?= $content ?>

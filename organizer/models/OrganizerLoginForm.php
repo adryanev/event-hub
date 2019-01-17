@@ -10,7 +10,7 @@ use yii\base\Model;
  */
 class OrganizerLoginForm extends Model
 {
-    public $username;
+    public $email;
     public $password;
     public $rememberMe = true;
 
@@ -24,7 +24,7 @@ class OrganizerLoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['email', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -71,7 +71,7 @@ class OrganizerLoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = UserOrganizer::findByUsername($this->username);
+            $this->_user = UserOrganizer::findByEmail($this->email);
         }
 
         return $this->_user;

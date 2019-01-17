@@ -9,13 +9,15 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 $fieldOptions1 = [
     'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "<span class='glyphicon glyphicon-user form-control-feedback'></span>{input}"
+    'inputTemplate' => "<span class='zmdi zmdi-email form-control-feedback'></span>{input}"
 ];
 
 $fieldOptions2 = [
     'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "<span class='glyphicon glyphicon-lock form-control-feedback'></span>{input}"
+    'inputTemplate' => "<span class='zmdi zmdi-lock form-control-feedback'></span>{input}"
 ];
+
+$this->title = "Login Organizer"
 ?>
 
 
@@ -28,15 +30,14 @@ $fieldOptions2 = [
     </div>
     <div class="m-t-40 card-box">
         <div class="panel-body">
-            <h1><?= Html::encode($this->title) ?></h1>
             <?php echo Alert::widget(['useSessionFlash'=>true])?>
 
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
             <?= $form
-                ->field($model, 'username', $fieldOptions1)
+                ->field($model, 'email', $fieldOptions1)
                 ->label(false)
-                ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+                ->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
 
             <?= $form
                 ->field($model, 'password', $fieldOptions2)

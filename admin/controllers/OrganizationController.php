@@ -67,6 +67,8 @@ class OrganizationController extends Controller
         $model = new Organization();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success","Berhasil menambahkan Organisasi");
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -87,6 +89,8 @@ class OrganizationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success","Berhasil menambahkan Organisasi");
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -105,6 +109,8 @@ class OrganizationController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash("success","Berhasil menghapus organisasi");
+
 
         return $this->redirect(['index']);
     }
