@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Link;
 use yii\web\Linkable;
@@ -114,9 +115,16 @@ class Bank extends \yii\db\ActiveRecord implements Linkable
      */
     public function getLinks()
     {
-        return[
-          Link::REL_SELF => Url::to(['bank/view','id'=>$this->id]),
+        return [
+            Link::REL_SELF => Url::to(['bank/view', 'id' => $this->id]),
 
         ];
+
+    }
+
+    public static function getBankAsKeyValue(){
+        $bank = self::find()->all();
+        $data = ArrayHelper::map($bank,'id','name');
+        return $data;
     }
 }

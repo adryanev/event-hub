@@ -23,7 +23,9 @@
         "yii2tech/ar-softdelete": "^1.0",
         "yii2mod/yii2-sweet-alert": "*",
         "nesbot/carbon": "^2.10",
-        "himiklab/yii2-recaptcha-widget": "*"
+        "himiklab/yii2-recaptcha-widget": "*",
+        "kartik-v/yii2-widget-fileinput": "dev-master",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

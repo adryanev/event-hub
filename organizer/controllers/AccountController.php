@@ -31,7 +31,7 @@ class AccountController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['activated'],
+                        'actions' => ['organizer-verification'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -46,7 +46,7 @@ class AccountController extends Controller
         $user = UserOrganizer::findOne(['id'=>$id, 'auth_key'=>$key, 'isDeleted'=>StatusKonten::STATUS_DELETED]);
         if(!is_null($user) || !empty($user)){
             $user->isDeleted = StatusKonten::STATUS_ACTIVE;
-            $user->save();
+            $user->save(false);
             Yii::$app->session->setFlash('success',"Selamat akun anda berhasi di konfirmasi");
 
         }
@@ -57,9 +57,19 @@ class AccountController extends Controller
     }
 
     public function actionOrganizerVerification(){
+        $this->layout = 'main-login';
+        $model = new \organizer\models\OrganizerVerificationForm(['scenario' => 'verification']);
 
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
 
-        return $this->render('verification');
+        return $this->render('organizer-verification', [
+            'model' => $model,
+        ]);
     }
 
 }

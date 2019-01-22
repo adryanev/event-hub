@@ -12,7 +12,6 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property int $id
  * @property int $id_organizer
  * @property string $verification_file
- * @property int $verification_status
  * @property int $isDeleted
  * @property int $created_at
  * @property int $updated_at
@@ -49,8 +48,8 @@ class OrganizerVerification extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_organizer', 'verification_file', 'created_at', 'updated_at'], 'required'],
-            [['id_organizer', 'verification_status', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
+            [['id_organizer', 'verification_file'], 'required'],
+            [['id_organizer', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
             [['verification_file'], 'string', 'max' => 255],
             [['id_organizer'], 'exist', 'skipOnError' => true, 'targetClass' => UserOrganizer::className(), 'targetAttribute' => ['id_organizer' => 'id']],
         ];

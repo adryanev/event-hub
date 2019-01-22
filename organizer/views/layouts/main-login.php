@@ -12,6 +12,8 @@ use yii\helpers\Html;
 use yii2mod\alert\Alert;
 
 AppAsset::register($this);
+$this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS_HEAD]);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -21,7 +23,9 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <?php $this->head();
+    ?>
+
 </head>
 <body>
 <?php $this->beginBody() ?>

@@ -54,6 +54,7 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
 {
 
     const SCENARIO_SIGNUP = 'signup';
+    const SCENARIO_VERIFICATION = 'verification';
     public function behaviors()
     {
         return
@@ -72,6 +73,8 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_SIGNUP] = ['name','password_hash','email'];
+        $scenarios[self::SCENARIO_VERIFICATION] = ['name','email','organization_type','address_1','country','province','city','postal_code',
+            'profile_picture','work_phone','cell_phone','description'];
         return $scenarios;
     }
 
@@ -560,7 +563,7 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     public function isVerified(): bool {
-        return $this->isVerified() === StatusKonten::STATUS_VERIFIED;
+        return $this->getIsVerified() === StatusKonten::STATUS_VERIFIED;
     }
 
     /**

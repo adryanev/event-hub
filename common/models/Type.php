@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Link;
 use yii\web\Linkable;
@@ -106,5 +107,11 @@ class Type extends \yii\db\ActiveRecord implements Linkable
         return[
           Link::REL_SELF => Url::to(['type/view','id'=>$this->id])
         ];
+    }
+
+    public static function getTypeAsKeyValue(){
+        $type = self::find()->all();
+        $data = ArrayHelper::map($type,'id','type_name');
+        return $data;
     }
 }

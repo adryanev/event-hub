@@ -72,6 +72,7 @@ class OrganizerLoginForm extends Model
     {
         if ($this->_user === null) {
             $this->_user = UserOrganizer::findByEmail($this->email);
+            Yii::debug($this->_user, __METHOD__);
         }
 
         return $this->_user;

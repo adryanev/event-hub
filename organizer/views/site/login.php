@@ -65,9 +65,6 @@ $this->title = "Login Organizer"
 </div>
 <!-- end wrapper page -->
 
-
-
 <script>
     var resizefunc = [];
 </script>
-
