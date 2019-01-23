@@ -14,12 +14,14 @@ use common\models\Bank;
 use common\models\Organization;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
+use organizer\models\OrganizerVerificationForm;
 use organizer\models\OrganizerVerificationUploadForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class AccountController extends Controller
 {
@@ -62,19 +64,24 @@ class AccountController extends Controller
 
     public function actionOrganizerVerification(){
         $this->layout = 'main-login';
-        $model = new \organizer\models\OrganizerVerificationForm(['scenario' => 'verification']);
+        $model = new OrganizerVerificationForm();
         $model2 = new OrganizerVerificationUploadForm();
         $dataType = Organization::getOrganizationAsKeyValue();
         $dataBank = Bank::getBankAsKeyValue();
         $mapsApi = Yii::$app->params['keys']['google_maps_browser_key2'];
+        if($post = Yii::$app->request->post()){
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
+        if ($model->load($post) && $model2->load($post)) {
+            $model->profile_picture = UploadedFile::getInstance($model,'profile_picture');
+            if($model->saveOrganizer()){
+                $model2->verificationFiles = UploadedFile::getInstances($model2,'verificationFiles');
+                if($model2->saveToDb()){
+                    Yii::$app->getSession()->setFlash('success','Berhasil Request Verifikasi Akun');
+                    return $this->goHome();
+                }
             }
         }
-
+    }
         return $this->render('organizer-verification', [
             'model' => $model,
             'model2'=> $model2,
@@ -84,8 +91,5 @@ class AccountController extends Controller
         ]);
     }
 
-    public function actionUploadAjax(){
-
-    }
 
 }

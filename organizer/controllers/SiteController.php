@@ -83,8 +83,14 @@ class SiteController extends Controller
     {
         if(!Yii::$app->user->identity->isVerified()){
 
+            if( Yii::$app->user->identity->getVerificationStatus() === 'pending' ){
+                return $this->render('index');
+
+            }
+
             return $this->redirect(['account/organizer-verification']);
         }
+
         return $this->render('index');
     }
 

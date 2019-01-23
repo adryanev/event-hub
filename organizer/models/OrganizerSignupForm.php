@@ -58,6 +58,7 @@ class OrganizerSignupForm extends Model
         $organizer->profile_picture = 'organizer.png';
         $organizer->generateAuthKey();
         $organizer->setPassword($this->password);
+        $organizer->setVerificationStatus(StatusKonten::ORGANIZER_NOT_VERIFIED);
         \Yii::debug($organizer,__METHOD__);
         return $organizer->save() ? $organizer : null;
 

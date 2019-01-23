@@ -17,5 +17,8 @@ class StatusKonten
     const STATUS_NOT_VERIFIED = 0;
     const STATUS_VERIFIED = 1;
     const STATUS_ACTIVE = 0;
+    const ORGANIZER_NOT_VERIFIED = 'not_verified';
+    const ORGANIZER_PENDING = 'pending';
+    const ORGANIZER_VERIFIED = 'verified';
 
 }

@@ -41,6 +41,7 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property int $created_at
  * @property int $updated_at
  * @property int $isVerified
+ * @property string $verification_status
  *
  * @property HubWalletOrganizer[] $hubWalletOrganizers
  * @property MoneyRedeemTransaction[] $moneyRedeemTransactions
@@ -846,6 +847,23 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $this->userSubscriptions = $userSubscriptions;
     }
+
+    /**
+     * @return string
+     */
+    public function getVerificationStatus(): string
+    {
+        return $this->verification_status;
+    }
+
+    /**
+     * @param string $verification_status
+     */
+    public function setVerificationStatus(string $verification_status): void
+    {
+        $this->verification_status = $verification_status;
+    }
+
 
 
 
