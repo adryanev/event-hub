@@ -25,7 +25,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
-
+        'js/bootstrap.min.js',
         'js/detect.js',
         'js/yii_override.js',
         'plugins/waypoints/lib/jquery.waypoints.js',

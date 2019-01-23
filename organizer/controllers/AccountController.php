@@ -10,11 +10,15 @@
 namespace organizer\controllers;
 
 
+use common\models\Bank;
+use common\models\Organization;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
+use organizer\models\OrganizerVerificationUploadForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class AccountController extends Controller
@@ -59,6 +63,10 @@ class AccountController extends Controller
     public function actionOrganizerVerification(){
         $this->layout = 'main-login';
         $model = new \organizer\models\OrganizerVerificationForm(['scenario' => 'verification']);
+        $model2 = new OrganizerVerificationUploadForm();
+        $dataType = Organization::getOrganizationAsKeyValue();
+        $dataBank = Bank::getBankAsKeyValue();
+        $mapsApi = Yii::$app->params['keys']['google_maps_browser_key2'];
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -69,7 +77,15 @@ class AccountController extends Controller
 
         return $this->render('organizer-verification', [
             'model' => $model,
+            'model2'=> $model2,
+            'dataType'=>$dataType,
+            'dataBank'=>$dataBank,
+            'mapsApi'=>$mapsApi,
         ]);
+    }
+
+    public function actionUploadAjax(){
+
     }
 
 }

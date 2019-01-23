@@ -28,7 +28,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'signup', 'error'],
+                        'actions' => ['login', 'signup', 'error','terms-of-service','faq'],
                         'allow' => true,
                     ],
                     [
@@ -149,6 +149,16 @@ class SiteController extends Controller
             'organization'=>$dataOrg
         ]);
 
+    }
+
+    public function actionTermsOfService(){
+
+        return $this->render('terms-of-service');
+    }
+
+    public function actionFaq(){
+
+        return $this->render('faq');
     }
 
 

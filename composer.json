@@ -25,7 +25,9 @@
         "nesbot/carbon": "^2.10",
         "himiklab/yii2-recaptcha-widget": "*",
         "kartik-v/yii2-widget-fileinput": "dev-master",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "yiidoc/yii2-redactor": "*",
+        "msvdev/yii2-widget-mappicker": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
@@ -73,5 +74,11 @@ class Organization extends \yii\db\ActiveRecord
     public function getUserOrganizers()
     {
         return $this->hasMany(UserOrganizer::className(), ['organization_type' => 'id']);
+    }
+
+    public static function getOrganizationAsKeyValue(){
+        $organization = self::find()->all();
+        $data = ArrayHelper::map($organization,'id','name');
+        return $data;
     }
 }

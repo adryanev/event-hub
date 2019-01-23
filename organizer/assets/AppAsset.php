@@ -13,8 +13,8 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/components.css',
         'css/core.css',
+        'css/components.css',
         'css/icons.css',
         'css/menu.css',
         'css/pages.css',
@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
-
+        'js/bootstrap.min.js',
         'js/detect.js',
         'js/yii_override.js',
         'plugins/waypoints/lib/jquery.waypoints.js',
@@ -36,16 +36,17 @@ class AppAsset extends AssetBundle
         'js/jquery.nicescroll.js',
         'js/jquery.scrollTo.min.js',
         'js/jquery.slimscroll.js',
-        'js/pace.min.js',
+//        'js/pace.min.js',
         'js/waves.js',
         'js/wow.min.js',
         'plugins/jquery-knob/jquery.knob.js',
         'plugins/jquery-ui/jquery-ui.js',
         'plugins/raphael/raphael-min.js',
         'plugins/moment/moment.js',
-        'plugins/bootstrap-wizard/jquery.bootstrap.wizard.js',
         'js/jquery.app.js',
         'js/jquery.core.js',
+        'plugins/bootstrap-wizard/jquery.bootstrap.wizard.js',
+
 
     ];
     public $depends = [

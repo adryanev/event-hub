@@ -15,6 +15,8 @@ use common\models\Bank;
 use common\models\Organization;
 use common\models\UserOrganizer;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
+use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
 
 class OrganizerVerificationForm extends Model
@@ -28,8 +30,9 @@ class OrganizerVerificationForm extends Model
     public $country;
     public $province;
     public $city;
-    public $latitude;
-    public $longitude;
+    public $coordinate;
+    private $latitude;
+    private $longitude;
     public $postal_code;
     /**
      * @var UploadedFile
@@ -85,6 +88,7 @@ class OrganizerVerificationForm extends Model
         if (!$this->validate()) return false;
         $organizer = $this->getOrganizer();
         $organizer->scenario = UserOrganizer::SCENARIO_VERIFICATION;
+        $this->setLatLong($this->coordinate);
         $organizer->setName($this->name);
         $organizer->setEmail($this->email);
         $organizer->setAddress1($this->address_1);
@@ -122,6 +126,11 @@ class OrganizerVerificationForm extends Model
             return true;
         } else return false;
 
+    }
+    public function setLatLong($coord){
+        $cord = StringHelper::explode($coord,'@');
+        $this->latitude = $coord[0];
+        $this->longitude = $coord[1];
     }
 
 
