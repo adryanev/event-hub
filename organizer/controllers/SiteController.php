@@ -6,9 +6,12 @@ use common\models\StatusKonten;
 use common\models\UserOrganizer;
 use organizer\models\OrganizerLoginForm;
 use organizer\models\OrganizerSignupForm;
+use Pusher\Pusher;
+use Pusher\PusherException;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -32,7 +35,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','send-notif'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -165,6 +168,34 @@ class SiteController extends Controller
     public function actionFaq(){
 
         return $this->render('faq');
+    }
+
+    public function actionSendNotif(){
+        $options = [
+            'cluster'=>Yii::$app->params['keys']['pusher_cluster'],
+            'useTLS'=>'true'
+        ];
+        try {
+            $pusher = new Pusher(
+                Yii::$app->params['keys']['pusher_key'],
+                Yii::$app->params['keys']['pusher_secret'],
+               Yii::$app->params['keys']['pusher_app_id'],
+                $options
+            );
+        } catch (PusherException $e) {
+        }
+
+        $data = [
+            'organizer'=>'Adryan Eka Vandra',
+            'message'=>'meminta verifikasi organizer.',
+        ];
+
+
+        try {
+            $pusher->trigger('admin-channel', 'organizer-verification-event', $data);
+        } catch (PusherException $e) {
+        }
+
     }
 
 

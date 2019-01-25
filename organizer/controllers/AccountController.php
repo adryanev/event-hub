@@ -10,15 +10,19 @@
 namespace organizer\controllers;
 
 
+use admin\models\NotificationAdmin;
 use common\models\Bank;
 use common\models\Organization;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
 use organizer\models\OrganizerVerificationForm;
 use organizer\models\OrganizerVerificationUploadForm;
+use Pusher\Pusher;
+use Pusher\PusherException;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -77,6 +81,9 @@ class AccountController extends Controller
                 $model2->verificationFiles = UploadedFile::getInstances($model2,'verificationFiles');
                 if($model2->saveToDb()){
                     Yii::$app->getSession()->setFlash('success','Berhasil Request Verifikasi Akun');
+                    $data['message'] = 'meminta verifikasi organizer.';
+                    $data['organizer'] = $model->name;
+                    $this->sendNotif($data);
                     return $this->goHome();
                 }
             }
@@ -89,6 +96,39 @@ class AccountController extends Controller
             'dataBank'=>$dataBank,
             'mapsApi'=>$mapsApi,
         ]);
+    }
+
+    private function sendNotif(array $data){
+
+        $channel = 'admin-channel';
+        $event = 'organizer-verification-event';
+        $message = Json::encode($data);
+        $notifAdmin = new NotificationAdmin();
+        $notifAdmin->channel = $channel;
+        $notifAdmin->event = $event;
+        $notifAdmin->messages = $message;
+        $notifAdmin->isOpened = StatusKonten::NOTIFICATION_NOT_READ;
+
+        $options = [
+            'cluster'=>Yii::$app->params['keys']['pusher_cluster'],
+            'useTLS'=>'true'
+        ];
+        try {
+            $pusher = new Pusher(
+                Yii::$app->params['keys']['pusher_key'],
+                Yii::$app->params['keys']['pusher_secret'],
+                Yii::$app->params['keys']['pusher_app_id'],
+                $options
+            );
+        } catch (\Exception $e) {
+        }
+
+        try {
+            $pusher->trigger($channel, $event, $data);
+            $notifAdmin->save();
+        } catch (\Exception $e) {
+        }
+
     }
 
 

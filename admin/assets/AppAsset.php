@@ -2,6 +2,7 @@
 
 namespace admin\assets;
 
+use common\assets\PusherAsset;
 use yii\web\AssetBundle;
 
 /**
@@ -19,9 +20,9 @@ class AppAsset extends AssetBundle
         'css/pages.css',
         'css/responsive.css',
         'css/variables.css',
-        'css/pace-theme-flash.css',
         'plugins/jquery-ui/jquery-ui.css',
         'plugins/css/animate.css',
+        'plugins/toastr/toastr.min.css',
 
     ];
     public $js = [
@@ -36,18 +37,19 @@ class AppAsset extends AssetBundle
         'js/jquery.scrollTo.min.js',
         'js/jquery.slimscroll.js',
         'js/modernizr.min.js',
-        'js/pace.min.js',
         'js/waves.js',
         'js/wow.min.js',
         'plugins/jquery-knob/jquery.knob.js',
         'plugins/jquery-ui/jquery-ui.js',
         'plugins/raphael/raphael-min.js',
         'plugins/moment/moment.js',
+        'plugins/toastr/toastr.min.js',
         'js/jquery.app.js',
         'js/jquery.core.js',
 
     ];
     public $depends = [
+        NotificationAsset::class,
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii2mod\alert\AlertAsset',
