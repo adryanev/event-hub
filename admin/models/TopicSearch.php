@@ -2,6 +2,7 @@
 
 namespace admin\models;
 
+use common\models\StatusKonten;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -45,6 +46,7 @@ class TopicSearch extends Topic
 
         // add conditions that should always apply here
 
+        $query->where(['isDeleted'=>StatusKonten::STATUS_ACTIVE]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

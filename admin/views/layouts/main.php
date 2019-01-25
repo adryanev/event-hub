@@ -40,10 +40,15 @@ AppAsset::register($this);
 <?= $this->render('sidebar') ?>
 <?= $this->render('content', ['content' => $content]) ?>
 <?= $this->render('footer') ?>
-
-
+<?= $this->render('right-sidebar')?>
 
 <?php $this->endBody() ?>
+
+
+<script>
+    var resizefunc = [];
+</script>
+
 <script type="text/javascript">
     lowLag.init();
     const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';

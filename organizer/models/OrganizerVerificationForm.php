@@ -116,11 +116,18 @@ class OrganizerVerificationForm extends Model
         }
 
         \Yii::debug('Model Ready to Save');
-        return $organizer->save() ? true : false;
+        if($organizer->save()){
+            return true;
+        }
+        else{
+            \Yii::debug($organizer->getErrors());
+            return false;
+        }
     }
 
     public function uploadProfilePicture()
     {
+        if(is_null($this->profile_picture) || empty($this->profile_picture)) return false;
         $path = \Yii::getAlias('@organizer/web/images/avatar');
         $fileName = $this->getOrganizer()->getId() . '-' . 'avatar' . '-' . Carbon::now()->timestamp . '.' . $this->profile_picture->getExtension();
         $this->_profile_file = $fileName;

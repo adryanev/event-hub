@@ -13,11 +13,11 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/components.css',
         'css/core.css',
+        'css/components.css',
         'css/icons.css',
-        'css/menu.css',
         'css/pages.css',
+        'css/menu.css',
         'css/responsive.css',
         'css/variables.css',
         'plugins/jquery-ui/jquery-ui.css',
@@ -27,8 +27,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/bootstrap.min.js',
-        'js/detect.js',
         'js/yii_override.js',
+        'js/detect.js',
         'plugins/waypoints/lib/jquery.waypoints.js',
         'plugins/counterup/jquery.counterup.min.js',
         'js/fastclick.js',
@@ -44,8 +44,8 @@ class AppAsset extends AssetBundle
         'plugins/raphael/raphael-min.js',
         'plugins/moment/moment.js',
         'plugins/toastr/toastr.min.js',
-        'js/jquery.app.js',
         'js/jquery.core.js',
+        'js/jquery.app.js',
 
     ];
     public $depends = [

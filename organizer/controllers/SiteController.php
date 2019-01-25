@@ -1,6 +1,7 @@
 <?php
 namespace organizer\controllers;
 
+use admin\models\NotificationAdmin;
 use common\models\Organization;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
@@ -171,6 +172,23 @@ class SiteController extends Controller
     }
 
     public function actionSendNotif(){
+        $data['message'] = 'meminta verifikasi organizer.';
+        $data['organizer'] = 'Wanabee54';
+        $data['idOrganizer'] = 1;
+       $this->sendNotif($data);
+
+    }
+
+    private function sendNotif(array $data){
+
+        $channel = 'admin-channel';
+        $event = 'organizer-verification-event';
+        $message = Json::encode($data);
+        $notifAdmin = new NotificationAdmin();
+        $notifAdmin->channel = $channel;
+        $notifAdmin->event = $event;
+        $notifAdmin->messages = $message;
+
         $options = [
             'cluster'=>Yii::$app->params['keys']['pusher_cluster'],
             'useTLS'=>'true'
@@ -179,25 +197,19 @@ class SiteController extends Controller
             $pusher = new Pusher(
                 Yii::$app->params['keys']['pusher_key'],
                 Yii::$app->params['keys']['pusher_secret'],
-               Yii::$app->params['keys']['pusher_app_id'],
+                Yii::$app->params['keys']['pusher_app_id'],
                 $options
             );
-        } catch (PusherException $e) {
+        } catch (\Exception $e) {
         }
 
-        $data = [
-            'organizer'=>'Adryan Eka Vandra',
-            'message'=>'meminta verifikasi organizer.',
-        ];
-
-
         try {
-            $pusher->trigger('admin-channel', 'organizer-verification-event', $data);
-        } catch (PusherException $e) {
+            $pusher->trigger($channel, $event, $data);
+            $notifAdmin->save();
+        } catch (\Exception $e) {
         }
 
     }
-
 
 
 }

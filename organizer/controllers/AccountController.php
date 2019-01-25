@@ -81,6 +81,7 @@ class AccountController extends Controller
                 $model2->verificationFiles = UploadedFile::getInstances($model2,'verificationFiles');
                 if($model2->saveToDb()){
                     Yii::$app->getSession()->setFlash('success','Berhasil Request Verifikasi Akun');
+                    $data['idOrganizer'] = $model->getOrganizer()->id;
                     $data['message'] = 'meminta verifikasi organizer.';
                     $data['organizer'] = $model->name;
                     $this->sendNotif($data);

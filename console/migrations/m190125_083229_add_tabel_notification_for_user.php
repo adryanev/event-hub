@@ -25,8 +25,8 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
             'messages'=>$this->json(),
             'channel'=>$this->string(),
             'event'=>$this->string(),
-            'isOpened'=>$this->boolean(),
-            'isDeleted'=>$this->boolean(),
+            'isOpened'=>$this->boolean()->defaultValue(0),
+            'isDeleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
 
@@ -37,8 +37,8 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
             'channel'=>$this->string(),
             'event'=>$this->string(),
             'id_organizer'=>$this->integer(),
-            'isOpened'=>$this->boolean(),
-            'isDeleted'=>$this->boolean(),
+            'isOpened'=>$this->boolean()->defaultValue(0),
+            'isDeleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
         ],$tableOptions);
@@ -48,8 +48,8 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
             'channel'=>$this->string(),
             'event'=>$this->string(),
             'id_participant'=>$this->integer(),
-            'isOpened'=>$this->boolean(),
-            'isDeleted'=>$this->boolean(),
+            'isOpened'=>$this->boolean()->defaultValue(0),
+            'isDeleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
         ],$tableOptions);

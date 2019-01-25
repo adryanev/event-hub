@@ -78,6 +78,7 @@ class TopicController extends Controller
         $model = new Topic();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success','Berhasil menambahkan Topik');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -98,6 +99,8 @@ class TopicController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success','Berhasil Mengubah Topik');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -117,7 +120,9 @@ class TopicController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->softDelete();
+
+        Yii::$app->getSession()->setFlash('success','Berhasil Menghapus Topik');
 
         return $this->redirect(['index']);
     }
