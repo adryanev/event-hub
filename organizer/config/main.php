@@ -5,14 +5,27 @@ $params = array_merge(
     require __DIR__ . '/params.php',
     require __DIR__ . '/params-local.php'
 );
-
 return [
     'id' => 'app-organizer',
+    'name'=> 'Event-Hub Organizer',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'organizer\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'redactor' => [
+            'class' => 'yii\redactor\RedactorModule',
+            'widgetClientOptions' => [
+                'buttonsHide' => ['image','file'],
+            ]
+        ],
+    ],
     'components' => [
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => \himiklab\yii2\recaptcha\ReCaptcha::class,
+            'siteKey' => $params['keys']['recaptcha_site_key'],
+            'secret' => $params['keys']['recaptcha_secret_key'],
+        ],
         'request' => [
             'csrfParam' => '_csrf-organizer',
         ],
@@ -49,6 +62,30 @@ return [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js'=>['js/jquery.min.js'],
+                    'jsOptions'=>['position'=>\yii\web\View::POS_HEAD]
+
+                ],
+
+            ],
+        ],
+        'formatter' => [
+
+            'datetimeFormat' => 'php:l, d F Y H:i',
+
+            'decimalSeparator' => ',',
+
+            'thousandSeparator' => '.',
+
+            'currencyCode' => 'Rp',
+
+        ],
+
             ],
     'params' => $params,
 ];

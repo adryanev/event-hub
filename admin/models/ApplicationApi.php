@@ -26,12 +26,8 @@ class ApplicationApi extends \yii\db\ActiveRecord
         return
             [
                 TimestampBehavior::className(),
-                'softDeleteBehavior' => [
-                    'class' => SoftDeleteBehavior::className(),
-                    'softDeleteAttributeValues' => [
-                        'isDeleted' => true
-                    ],
-                ],
+                SoftDeleteBehavior::class
+
             ];
     }
 

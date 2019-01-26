@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
@@ -72,5 +73,11 @@ class EventStatus extends \yii\db\ActiveRecord
     public function getEvents()
     {
         return $this->hasMany(Event::className(), ['event_status' => 'id']);
+    }
+
+    public static function getEventStatusAsKeyValue(){
+        $status = self::find()->all();
+        $data = ArrayHelper::map($status,'id','name');
+        return $data;
     }
 }

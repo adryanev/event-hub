@@ -55,7 +55,8 @@ return [
                 'yii\web\JqueryAsset' => [
                     'basePath' => '@webroot',
                     'baseUrl' => '@web',
-                    'js'=>['js/jquery.min.js']
+                    'js'=>['js/jquery.min.js'],
+                    'jsOptions'=>['position'=>\yii\web\View::POS_HEAD]
                 ],
 
             ],

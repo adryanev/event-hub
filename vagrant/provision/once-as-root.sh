@@ -28,7 +28,7 @@ info "Install php & apache2 software"
 apt-get install software-properties-common python-software-properties
 add-apt-repository -y ppa:ondrej/php
 apt-get update
-apt-get install -y php7.2 php7.2-common php7.2-curl php7.2-cli php7.2-intl php7.2-mysqlnd php7.2-gd php7.2-fpm php7.2-mbstring php7.2-xml libapache2-mod-php unzip apache2 mysql-server-5.7 php.xdebug
+apt-get install -y php7.2 php7.2-common php7.2-curl php7.2-cli php7.2-intl php7.2-mysqlnd php7.2-gd php7.2-fpm php7.2-mbstring php7.2-xml php7.2-zip libapache2-mod-php unzip apache2 mysql-server-5.7 php.xdebug
 
 info "Install NodeJS"
 curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
@@ -75,7 +75,7 @@ a2ensite app.conf
 echo "Done!"
 
 info "Initailize databases for MySQL"
-mysql -uroot <<< "CREATE DATABASE `event-hub`"
+mysql -uroot <<< 'CREATE DATABASE `event-hub`;'
 echo "Done!"
 
 info "Install composer"
