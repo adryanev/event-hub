@@ -183,11 +183,11 @@ class SiteController extends Controller
 
         $channel = 'admin-channel';
         $event = 'organizer-verification-event';
-        $message = Json::encode($data);
+        $message = $data;
         $notifAdmin = new NotificationAdmin();
         $notifAdmin->channel = $channel;
         $notifAdmin->event = $event;
-        $notifAdmin->messages = $message;
+        $notifAdmin->messages = Json::encode($message);
 
         $options = [
             'cluster'=>Yii::$app->params['keys']['pusher_cluster'],

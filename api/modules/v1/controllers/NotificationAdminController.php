@@ -12,6 +12,7 @@ namespace api\modules\v1\controllers;
 
 use admin\models\NotificationAdmin;
 use common\extensions\auth\ApiAuth;
+use common\models\StatusKonten;
 use yii\rest\ActiveController;
 
 class NotificationAdminController extends ActiveController
@@ -21,12 +22,33 @@ class NotificationAdminController extends ActiveController
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',
     ];
+    public static function allowedDomains()
+    {
+        return [
+            // '*',                        // star allows all domains
+            'http://admin.event-hub.test',
+            'http://organizer.event-hub.test',
+            'http://event-hub.test',
+            'http://localhost',
+        ];
+    }
 
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class'=>ApiAuth::className()
+//        $behaviors['authenticator'] = [
+//            'class'=>ApiAuth::className()
+//        ];
+        $behaviors['corsFilter'] =[
+            'class' => \yii\filters\Cors::className(),
+            'cors'  => [
+                // restrict access to domains:
+                'Origin'                           => static::allowedDomains(),
+                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+                'Access-Control-Max-Age'           => 3600,                 // Cache (seconds)
+
+            ],
         ];
         $behaviors['contentNegotiator'] = [
             'class' => \yii\filters\ContentNegotiator::className(),
