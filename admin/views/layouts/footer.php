@@ -9,9 +9,7 @@
 <footer class="footer text-right">
     &copy; <script>document.write(new Date().getFullYear())</script> Adryan Eka Vandra.
 </footer>
-
 </div>
-
 <!-- ============================================================== -->
 <!-- End Right content here -->
 <!-- ============================================================== -->

@@ -34,7 +34,7 @@ AppAsset::register($this);
 
     </script>
 </head>
-<body class="fixed-left widescreen">
+<body class="fixed-left">
 <?php $this->beginBody() ?>
 <?= $this->render('header') ?>
 <?= $this->render('sidebar') ?>
@@ -45,9 +45,7 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 
 
-<script>
-    var resizefunc = [];
-</script>
+
 
 <script type="text/javascript">
     lowLag.init();
@@ -56,6 +54,13 @@ AppAsset::register($this);
 
     const channel = pusher.subscribe('admin-channel');
     channel.bind('organizer-verification-event', function (data) {
+
+        const urlNotif = 'http://api.event-hub.test/v1'
+        $.ajax(
+            {
+                url: '<?=Yii::getAlias('@api')?>'
+            }
+        );
         lowLag.play(notifSound);
 
         let counter = -1;

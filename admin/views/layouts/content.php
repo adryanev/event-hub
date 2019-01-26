@@ -7,7 +7,12 @@
  */
 use yii\widgets\Breadcrumbs;
 ?>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
 <div class="content-page">
+    <!-- Start content -->
     <div class="content">
         <div class="container">
             <?= Breadcrumbs::widget([
@@ -17,8 +22,7 @@ use yii\widgets\Breadcrumbs;
                 'useSessionFlash' => true,
             ]);?>
             <?=$content?>
-        </div>
-    </div>
+        </div> <!-- container -->
+    </div> <!-- content -->
 
-</div>
 

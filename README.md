@@ -27,7 +27,6 @@ admin
     tests/               contains tests for backend application    
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
-    
 common
     config/              contains shared configurations
     mail/                contains view files for e-mails
