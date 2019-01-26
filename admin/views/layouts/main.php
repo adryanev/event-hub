@@ -51,17 +51,30 @@ AppAsset::register($this);
     lowLag.init();
     const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
     lowLag.load(notifSound);
+    const urlNotif = 'http://api.event-hub.test/v1/notification-admin';
+    const token = 'IF56jjM4RXAUA5IDLIce7dH23wNfIewp';
+    const notification = document.getElementById('notif-list');
+
 
     const channel = pusher.subscribe('admin-channel');
     channel.bind('organizer-verification-event', function (data) {
 
-        const urlNotif = 'http://api.event-hub.test/v1'
-        $.ajax(
-            {
-                url: '<?=Yii::getAlias('@api')?>'
-            }
-        );
+
         lowLag.play(notifSound);
+        console.log(data);
+        let html = "<li class=\"list-group-item\">\n" +
+            "                    <a href=\"#\" class=\"user-list-item\">\n" +
+            "                        <div class=\"icon bg-info\">\n" +
+            "                            <i class=\"zmdi zmdi-comment\"></i>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"user-desc\">\n" +
+            "                            <span class=\"name\">"+data.organizer+"</span>\n" +
+            "                            <span class=\"desc\">"+data.message+"</span>\n" +
+            "                            <span class=\"time\">just now</span>\n" +
+            "                        </div>\n" +
+            "                    </a>\n" +
+            "                </li>";
+        notification.insertAdjacentHTML('afterbegin',html)
 
         let counter = -1;
         let toastCounter = 0;
@@ -89,7 +102,8 @@ AppAsset::register($this);
             "hideEasing": "linear",
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
-        }
+        };
+
 
         function getLastToast() {
             return lastToast;

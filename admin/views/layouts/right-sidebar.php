@@ -17,7 +17,7 @@
     </a>
     <h4 class="">Notifications</h4>
     <div class="notification-list nicescroll">
-        <ul class="list-group list-no-border user-list">
+        <ul class="list-group list-no-border user-list" id="notif-list">
 
             <?php
             $notifs = \admin\models\NotificationAdmin::find()->where(['isDeleted' => 0])->orderBy('created_at desc')->limit(10)->all();
