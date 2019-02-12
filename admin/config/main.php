@@ -14,6 +14,7 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+
         'request' => [
             'csrfParam' => '_csrf-admin',
         ],
@@ -58,6 +59,13 @@ return [
                     'js'=>['js/jquery.min.js'],
                     'jsOptions'=>['position'=>\yii\web\View::POS_HEAD]
                 ],
+                'dosamigos\google\maps\MapAsset' => [
+                    'options' => [
+                        'key' => $params['keys']['google_maps_browser_key2'],
+                        'language' => 'id',
+                        'version' => '3.1.18'
+                    ]
+                ]
 
             ],
         ],

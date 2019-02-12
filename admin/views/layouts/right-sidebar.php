@@ -12,10 +12,15 @@
 
 <!-- Right Sidebar -->
 <div class="side-bar right-bar">
+
     <a href="javascript:void(0);" class="right-bar-toggle">
         <i class="zmdi zmdi-close-circle-o"></i>
     </a>
     <h4 class="">Notifications</h4>
+    <?= \yii\helpers\Html::a('<h6>Lihat semua notifikasi</h6>',\yii\helpers\Url::to(['site/notification']))?>
+
+
+
     <div class="notification-list nicescroll">
         <ul class="list-group list-no-border user-list" id="notif-list">
 
@@ -28,7 +33,7 @@
                ?>
 
                 <li class="list-group-item">
-                    <a href="#" class="user-list-item">
+                    <a href="<?=\yii\helpers\Url::to(['verifikasi-organizer/index'])?>" class="user-list-item">
                         <div class="icon bg-info">
                             <i class="zmdi zmdi-comment"></i>
                         </div>

@@ -50,9 +50,8 @@ AppAsset::register($this);
 <script type="text/javascript">
     lowLag.init();
     const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
+    const url = 'http://admin.event-hub.com/verifikasi-organizer/';
     lowLag.load(notifSound);
-    const urlNotif = 'http://api.event-hub.test/v1/notification-admin';
-    const token = 'IF56jjM4RXAUA5IDLIce7dH23wNfIewp';
     const notification = document.getElementById('notif-list');
 
 
@@ -63,7 +62,7 @@ AppAsset::register($this);
         lowLag.play(notifSound);
         console.log(data);
         let html = "<li class=\"list-group-item\">\n" +
-            "                    <a href=\"#\" class=\"user-list-item\">\n" +
+            "                    <a href=\""+url+"\" class=\"user-list-item\">\n" +
             "                        <div class=\"icon bg-info\">\n" +
             "                            <i class=\"zmdi zmdi-comment\"></i>\n" +
             "                        </div>\n" +

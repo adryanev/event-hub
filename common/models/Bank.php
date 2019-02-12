@@ -66,8 +66,8 @@ class Bank extends \yii\db\ActiveRecord implements Linkable
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'code' => 'Code',
+            'name' => 'Bank Name',
+            'code' => ' Bank Code',
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
