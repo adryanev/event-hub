@@ -17,7 +17,7 @@
         <i class="zmdi zmdi-close-circle-o"></i>
     </a>
     <h4 class="">Notifications</h4>
-    <?= \yii\helpers\Html::a('<h6>Lihat semua notifikasi</h6>',\yii\helpers\Url::to(['site/notification']))?>
+    <?= \yii\helpers\Html::a('<h6>Lihat semua notifikasi</h6>',\yii\helpers\Url::to(['notification/index']))?>
 
 
 
