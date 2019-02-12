@@ -1514,17 +1514,11 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
    Accounts pages
 ============= */
 .account-pages {
-  background: url("../images/gallery/5.jpg") center;
+  background: url("../images/big/bg1.jpg") center;
   position: absolute;
   height: 100%;
   width: 100%;
   background-size: cover;
-
-  -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px);
 }
 .wrapper-page {
   margin: 5% auto;
@@ -1536,6 +1530,8 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 }
 .wrapper-page .logo {
   font-size: 42px;
+  float: none;
+  color: #188ae2 !important;
 }
 .panel-pages {
   border-radius: 6px;
@@ -1730,8 +1726,8 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 }
 #main {
   position: fixed;
-  top: 72px;
-  left: 490px;
+  top: 125px;
+  left: 330px;
   bottom: 0;
   right: 0;
   z-index: 4;
@@ -1983,7 +1979,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 }
 #message {
   position: fixed;
-  top: 72px;
+  top: 125px;
   left: 60%;
   bottom: 0;
   width: 40%;
@@ -2152,7 +2148,11 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   }
   #main {
     left: 0;
+    top: 60px;
     box-shadow: none;
+  }
+  #message {
+    top: 60px;
   }
   #main .header .page-title .sidebar-toggle-btn {
     margin-right: 20px;
