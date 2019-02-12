@@ -53,10 +53,10 @@ class SiteController extends Controller
 
     public function beforeAction($action) {
         if (parent::beforeAction($action)) {
+
             // change layout for error action
             if ($action->id=='error') $this->layout ='main-not-found';
-            if($action->id=='login' || 'signup') $this->layout='main-login';
-            $this->layout = 'main';
+
             return true;
         } else {
             return false;
@@ -106,6 +106,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout='main-login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

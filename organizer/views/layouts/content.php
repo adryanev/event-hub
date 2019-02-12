@@ -1,3 +1,7 @@
+
+<?php echo \yii2mod\alert\Alert::widget([
+    'useSessionFlash' => true,
+]);?>
 <div class="wrapper">
     <div class="container">
 
