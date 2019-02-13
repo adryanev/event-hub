@@ -90,8 +90,11 @@ use yii\helpers\Html; ?>
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="ui-buttons.html">Buat Event</a></li>
-                                    <li><a href="ui-cards.html">Event Saya</a></li>
+                                    <li>
+                                        <?=Html::a('Buat Event',\yii\helpers\Url::to(['event/create']))?>
+                                    <li>
+                                        <?=Html::a('Event Saya',\yii\helpers\Url::to(['event/index']))?>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -101,9 +104,15 @@ use yii\helpers\Html; ?>
                     <li class="has-submenu">
                         <a href="#"><i class="zmdi zmdi-view-list"></i> <span> Laporan </span> </a>
                         <ul class="submenu">
-                            <li><a href="tables-basic.html">Summary</a></li>
-                            <li><a href="tables-datatable.html">Event</a></li>
-                            <li><a href="tables-responsive.html">Feedback</a></li>
+                            <li>
+                                <?=Html::a('Summary',\yii\helpers\Url::to(['laporan/summary']))?>
+                                </li>
+                            <li>
+                                <?=Html::a('Detail',\yii\helpers\Url::to(['laporan/detail']))?>
+                            </li>
+                            <li>
+                                <?=Html::a('Feedback',\yii\helpers\Url::to(['laporan/feedback']))?>
+                            </li>
                         </ul>
                     </li>
 
