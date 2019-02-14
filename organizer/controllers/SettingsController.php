@@ -10,7 +10,9 @@
 namespace organizer\controllers;
 
 
-class SettingsController
+use yii\web\Controller;
+
+class SettingsController extends Controller
 {
 
 }

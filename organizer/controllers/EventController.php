@@ -11,8 +11,10 @@ namespace organizer\controllers;
 
 
 use common\models\Event;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class EventController extends Controller
@@ -42,10 +44,12 @@ class EventController extends Controller
 
 
     public function actionIndex(){
-        $events = Event::find()->where(['']);
-        return $this->render('index');
+        $events = Event::find()->where(['user_organizer'=>\Yii::$app->getUser()->getIdentity()->getId()]);
+        return $this->render('index',['events'=>$events]);
     }
     public function actionCreate(){
+
+
     }
     public function actionDetail($id){
 
