@@ -11,6 +11,7 @@ namespace organizer\controllers;
 
 
 use common\models\Event;
+use organizer\models\CreateEventForm;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -49,6 +50,8 @@ class EventController extends Controller
     }
     public function actionCreate(){
 
+        $model = new CreateEventForm();
+        return $this->render('create-event',['model'=>$model]);
 
     }
     public function actionDetail($id){

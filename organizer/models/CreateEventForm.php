@@ -18,6 +18,8 @@ use yii\web\UploadedFile;
 
 class CreateEventForm extends Model
 {
+    const scenario_event_offline = 'event-offline';
+    const scenario_event_online = 'event-online';
     public $title;
     public $isOffline;
     public $venueName;
@@ -27,13 +29,7 @@ class CreateEventForm extends Model
     public $province;
     public $city;
     public $coordinate;
-    private $latitude;
-    private $longitude;
     public $dateRange;
-    private $startDate;
-    private $endDate;
-    private $startTime;
-    private $endTime;
     /**
      * @var UploadedFile
      */
@@ -51,7 +47,32 @@ class CreateEventForm extends Model
 
     private $_poster_name;
     private $_event;
+    private $latitude;
+    private $longitude;
+    private $startDate;
+    private $endDate;
+    private $startTime;
+    private $endTime;
 
+
+    public function rules()
+    {
+        return [
+            [['title','isOffline','venueName','address1','country','province','city','coordinate','dateRange','description',
+                'publishingType','type','topic','showRemaining','userOrganizer'], 'required'],
+            [['address2','eventPoster','instagramLink','facebookLink','twitterLink','eventStatus'],'safe'],
+            [['title','venueName','address1','address2','country','province','city','coordinate','description','publishingType',
+                'instagramLink','facebookLink','twitterLink'], 'string'],
+            [['isOffline','showRemaining'], 'boolean'],
+        ];
+    }
+
+    public function scenarios()
+    {
+        $scenario = parent::scenarios();
+        $scenario[self::scenario_event_offline] = [];
+        return $scenario;
+    }
 
     public function createEvent(){
         if(!$this->validate()) return false;
