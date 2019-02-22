@@ -836,13 +836,13 @@ File: Components
   border-radius: 5px;
   -moz-border-radius: 5px;
   background-clip: padding-box;
-  margin-bottom: 20px;
   position: relative;
   -webkit-transition: opacity 3s ease-in-out;
   -moz-transition: opacity 3s ease-in-out;
   -ms-transition: opacity 3s ease-in-out;
   -o-transition: opacity 3s ease-in-out;
   opacity: 1;
+  margin-bottom: 20px;
 }
 .portlet .portlet-heading {
   -webkit-border-radius: 3px 3px 0px 0px;
@@ -907,12 +907,12 @@ File: Components
 }
 .panel-disabled {
   background: rgba(243, 242, 241, 0.5);
+  bottom: 0;
   left: 0;
   cursor: wait;
   position: absolute;
-  right: -5px;
+  right: 0;
   top: 0;
-  bottom: 0;
 }
 .loader-1 {
   width: 30px;
@@ -1282,7 +1282,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before
 }
 /* Fixed table */
 .fixedHeader-floating {
-  top: 70px !important;
+  top: 124px !important;
 }
 /* Key Table */
 table.dataTable th.focus,

@@ -64,7 +64,7 @@ use yii2mod\alert\Alert;
                                                     <?= $form->field($model, 'postal_code')->textInput() ?>
                                                     <?= $form->field($model, 'coordinate')->widget(\msvdev\widgets\mappicker\MapInput::class, [
                                                         'service' => 'google',
-                                                        'apiKey' => $mapsApi,
+                                                        'apiKey' => Yii::$app->params['keys']['google_maps_browser_key2'],
                                                         'mapZoom' => 12,
                                                         'mapCenter' => [0.511907, 101.448639]
                                                     ]) ?>

@@ -61,7 +61,7 @@ class Organization extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Organization Name',
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

@@ -138,6 +138,12 @@ a:focus {
   line-height: 16px;
   margin-bottom: 8px;
 }
+.wrapper {
+  padding-top: 130px;
+}
+.container {
+  width: 90%;
+}
 /* =============
    Helper clasess
 ============= */
@@ -1194,7 +1200,9 @@ pre {
   .hidden-print,
   .breadcrumb,
   .page-title,
-  .footer {
+  .footer,
+  #topnav,
+  .btn-custom {
     display: none;
     margin: 0px;
     padding: 0px;
@@ -1203,7 +1211,7 @@ pre {
   .right-bar {
     display: none;
   }
-  .content {
+  .wrapper {
     margin-top: 0px !important;
     padding-top: 0px;
   }

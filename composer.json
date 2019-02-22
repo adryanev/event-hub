@@ -30,7 +30,9 @@
         "msvdev/yii2-widget-mappicker": "*",
         "pusher/pusher-php-server": "^3.3",
         "npm-asset/axios": "^0.18.0",
-        "npm-asset/vue": "^2.5"
+        "npm-asset/vue": "^2.5",
+        "2amigos/yii2-google-maps-library": "*",
+        "kartik-v/yii2-date-range": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

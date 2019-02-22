@@ -179,7 +179,7 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBankName()
+    public function getBank()
     {
         return $this->hasOne(Bank::className(), ['id' => 'bank_name']);
     }
@@ -187,9 +187,9 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrganizationType()
+    public function getOrganization()
     {
-        return $this->hasOne(Organization::className(), ['id' => 'organization_type']);
+        return $this->hasOne(Organization::class, ['id' => 'organization_type']);
     }
 
     /**

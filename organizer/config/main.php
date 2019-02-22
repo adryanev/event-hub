@@ -71,6 +71,13 @@ return [
                     'jsOptions'=>['position'=>\yii\web\View::POS_HEAD]
 
                 ],
+                'dosamigos\google\maps\MapAsset' => [
+                    'options' => [
+                        'key' => $params['keys']['google_maps_browser_key2'],
+                        'language' => 'id',
+                        'version' => '3.1.18'
+                    ]
+                ]
 
             ],
         ],

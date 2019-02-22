@@ -37,10 +37,12 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property int $isDeleted
  * @property int $created_at
  * @property int $updated_at
+ * @property int $user_organizer
  *
  * @property EventStatus $eventStatus
  * @property Topic $topic0
  * @property Type $type0
+ * @property UserOrganizer $userOrganizer
  * @property Ticketing[] $ticketings
  */
 class Event extends \yii\db\ActiveRecord
@@ -74,7 +76,7 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'venue_name', 'address_1', 'country', 'province', 'city', 'start_date', 'end_date', 'start_time', 'end_time', 'event_poster', 'description', 'publishing_type', 'type', 'topic', 'show_remaining', 'created_at', 'updated_at'], 'required'],
-            [['is_offline', 'type', 'topic', 'show_remaining', 'event_status', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
+            [['is_offline', 'type', 'topic', 'show_remaining', 'event_status', 'isDeleted', 'created_at', 'updated_at', 'user_organizer'], 'integer'],
             [['latitude', 'longitude'], 'number'],
             [['title', 'venue_name', 'event_poster', 'description', 'instagram_link', 'facebook_link', 'twitter_link'], 'string', 'max' => 255],
             [['address_1', 'address_2'], 'string', 'max' => 64],
@@ -84,6 +86,7 @@ class Event extends \yii\db\ActiveRecord
             [['event_status'], 'exist', 'skipOnError' => true, 'targetClass' => EventStatus::className(), 'targetAttribute' => ['event_status' => 'id']],
             [['topic'], 'exist', 'skipOnError' => true, 'targetClass' => Topic::className(), 'targetAttribute' => ['topic' => 'id']],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type' => 'id']],
+            [['user_organizer'], 'exist', 'skipOnError' => true, 'targetClass' => UserOrganizer::className(), 'targetAttribute' => ['user_organizer' => 'id']],
         ];
     }
 
@@ -121,6 +124,7 @@ class Event extends \yii\db\ActiveRecord
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'user_organizer' => 'User Organizer',
         ];
     }
 
@@ -146,6 +150,14 @@ class Event extends \yii\db\ActiveRecord
     public function getType0()
     {
         return $this->hasOne(Type::className(), ['id' => 'type']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserOrganizer()
+    {
+        return $this->hasOne(UserOrganizer::className(), ['id' => 'user_organizer']);
     }
 
     /**
