@@ -4,7 +4,7 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=event-hub',
-            'username' => 'root',
+            'username' => 'developer',
             'password' => '',
             'charset' => 'utf8',
         ],
