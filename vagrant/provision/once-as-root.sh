@@ -42,27 +42,27 @@ mysql -uroot <<< "DROP USER 'root'@'localhost'"
 mysql -uroot <<< "FLUSH PRIVILEGES"
 echo "Done!"
 
-#info "Configure PHP-FPM"
-#sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
-#sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
-#sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
-#cat << EOF > /etc/php/7.2/mods-available/xdebug.ini
-#zend_extension=xdebug.so
-#xdebug.remote_enable=1
-#xdebug.remote_connect_back=1
-#xdebug.remote_port=9000
-#xdebug.remote_autostart=1
-#EOF
-#echo "Done!"
-#
-#info "Configure Apache"
-#sed -i 's/user www-data/user vagrant/g' /etc/nginx/nginx.conf
-#echo "Done!"
+info "Configure PHP-FPM"
+sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.2/fpm/pool.d/www.conf
+cat << EOF > /etc/php/7.2/mods-available/xdebug.ini
+zend_extension=xdebug.so
+xdebug.remote_enable=1
+xdebug.remote_connect_back=1
+xdebug.remote_port=9000
+xdebug.remote_autostart=1
+EOF
+echo "Done!"
+
+info "Configure Apache"
+sudo sed -ri -e 's/(export\s+APACHE_RUN_(USER|GROUP))=www-data/\1=vagrant/' /etc/apache2/envvars
+echo "Done!"
 
 info "Configure Apache2"
 a2enmod php7.2
 a2enmod proxy_fcgi setenvif
-a2enconf php7.0-fpm
+a2enconf php7.2-fpm
 a2enmod rewrite
 echo "Done!"
 
