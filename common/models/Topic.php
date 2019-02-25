@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Link;
 use yii\web\Linkable;
@@ -111,5 +112,11 @@ class Topic extends \yii\db\ActiveRecord implements Linkable
         return[
           Link::REL_SELF => Url::to(['topic/view','id'=>$this->id])
         ];
+    }
+
+    public static function getTopicAsKeyValue(){
+        $data = self::find()->all();
+        $json = ArrayHelper::map($data,'id','topic_name');
+        return $json;
     }
 }

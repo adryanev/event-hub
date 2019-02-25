@@ -7,6 +7,7 @@
  * Time: 5:11 PM
  */
 
+$success = empty(Yii::$app->session->getFlash('success')) || is_null(Yii::$app->session->getFlash('success'))? false : true;
 ?>
 
 
@@ -17,6 +18,8 @@
         <a href="<?=Yii::$app->urlManager->getBaseUrl()?>" class="logo"><span>Event-Hub<span> Organizer</span></span></a>
         <h5 class="text-muted m-t-0 font-600">Oragnizer Dashboard Aplikasi Event-Hub</h5>
     </div>
+
+    <?php if($success) : ?>
     <div class="m-t-40 card-box">
         <div class="text-center">
             <h4 class="text-uppercase font-bold m-b-0">Email Berhasil diverifikasi.</h4>
@@ -27,6 +30,17 @@
 
         </div>
     </div>
+    <?php else: ?>
+        <div class="m-t-40 card-box">
+            <div class="text-center">
+                <h4 class="text-uppercase font-bold m-b-0">Email Gagal diverifikasi.</h4>
+            </div>
+            <div class="panel-body text-center">
+                <p class="text-muted font-13 m-t-20"> Silahkan cek kembali email anda. </p>
+            </div>
+        </div>
+
+    <?php endif; ?>
 
 </div>
 <!-- end wrapper page -->

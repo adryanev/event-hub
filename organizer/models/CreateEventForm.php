@@ -95,7 +95,7 @@ class CreateEventForm extends Model
         $modelEvent->instagram_link = $this->instagramLink;
         $modelEvent->facebook_link = $this->facebookLink;
         $modelEvent->event_status = $this->eventStatus;
-        $modelEvent->user_organizer = $this->userOrganizer;
+        $modelEvent->user_organizer = \Yii::$app->user->identity->getId();
 
         if($modelEvent->save()){
             return true;

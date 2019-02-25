@@ -11,6 +11,8 @@ namespace organizer\controllers;
 
 
 use common\models\Event;
+use common\models\Topic;
+use common\models\Type;
 use organizer\models\CreateEventForm;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -51,7 +53,11 @@ class EventController extends Controller
     public function actionCreate(){
 
         $model = new CreateEventForm();
-        return $this->render('create-event',['model'=>$model]);
+        $dataTopic = Topic::getTopicAsKeyValue();
+        $dataType = Type::getTypeAsKeyValue();
+        return $this->render('create-event',['model'=>$model,
+            'dataTopic'=>$dataTopic,
+            'dataType'=>$dataType]);
 
     }
     public function actionDetail($id){
