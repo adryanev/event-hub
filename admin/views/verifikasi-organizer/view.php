@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="col-md-6">
                             <div class="text-center">
-                                <?=Html::img(Yii::getAlias('@organizerImage/avatar/'.$model->profile_picture),['class'=>'mx-auto d-block'])?>
+                                <?=Html::img(Yii::getAlias('@organizerImage/avatar/'.$model->profile_picture),['class'=>'mx-auto d-block', 'height'=>200, 'width'=>200])?>
                                 <h4 class="m-t-0 m-b-30"><?= Html::encode($this->title) ?></h4>
                                 <p>Description:</p><?=\yii\helpers\HtmlPurifier::process($model->description)?>
                             </div>

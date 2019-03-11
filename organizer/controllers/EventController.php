@@ -11,6 +11,7 @@ namespace organizer\controllers;
 
 
 use common\models\Event;
+use common\models\StatusKonten;
 use common\models\Topic;
 use common\models\Type;
 use organizer\models\CreateEventForm;
@@ -52,6 +53,9 @@ class EventController extends Controller
     }
     public function actionCreate(){
 
+        if(\Yii::$app->user->identity->verification_status === StatusKonten::ORGANIZER_PENDING){
+            return $this->redirect(['site/index']);
+        }
         $model = new CreateEventForm();
         $dataTopic = Topic::getTopicAsKeyValue();
         $dataType = Type::getTypeAsKeyValue();

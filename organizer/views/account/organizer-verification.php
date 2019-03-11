@@ -49,14 +49,14 @@ $this->title = "Organizer Verification"
                                                         'options' => ['placeholder' => 'Pilih tipe akun anda']
                                                     ]) ?>
                                                     <?= $form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::className()) ?>
-                                                    <?= $form->field($model, 'work_phone')->textInput(['placeholder'=>'076100000 / 081200000000']) ?>
-                                                    <?= $form->field($model, 'cell_phone')->textInput(['placeholder'=>'081200000000']) ?>
+                                                    <?= $form->field($model, 'work_phone')->textInput(['placeholder' => '076100000 / 081200000000']) ?>
+                                                    <?= $form->field($model, 'cell_phone')->textInput(['placeholder' => '081200000000']) ?>
                                                     <?= $form->field($model, 'twitter')->textInput([
                                                         'placeholder' => 'https://twitter.com/xxxxxx'
                                                     ]) ?>
                                                     <?= $form->field($model, 'instagram')->textInput(['placeholder' => 'https://www.instagram.com/xxxxxx']) ?>
                                                     <?= $form->field($model, 'facebook')->textInput(['placeholder' => 'https://web.facebook.com/xxxxxx']) ?>
-                                                    <?= $form->field($model, 'whatsapp')->textInput(['placeholder'=>'081200000000']) ?>
+                                                    <?= $form->field($model, 'whatsapp')->textInput(['placeholder' => '081200000000']) ?>
                                                     <?= $form->field($model, 'website')->textInput(['placeholder' => 'https://www.example.com']) ?>
                                                     <?= $form->field($model, 'bank_name')->widget(\kartik\select2\Select2::class, [
                                                         'data' => $dataBank
@@ -173,21 +173,36 @@ var trackChange = function(element) {
                 if(result[0]){
                     var addrObject = result[0].address_components;
                     console.log(addrObject);
-
-                    var address = {
-                        streetNumber: addrObject[0].long_name,
-                        route: addrObject[1].long_name,
-                        lvl4: addrObject[2].long_name,
-                        lvl3: addrObject[3].long_name,
-                        lvl2: addrObject[4].long_name,
-                        lvl1: addrObject[5].long_name,
-                        country:addrObject[6].long_name,
-                        postalCode: addrObject[7].long_name,
-                        formattedAddress: result[0].formatted_ddress
-                    };
-                    console.log(address)
                     
-                    $('#organizerverificationform-city').val(address.lvl2);
+                     var address = {};
+
+                     for(let i = 0; i< addrObject.length; i++){
+                         let component = addrObject[i];
+                         switch (component.types[0]) {
+                        case 'postal_code':
+                             address.postalCode = component.long_name; break;
+                        case 'administrative_area_level_2':
+                            address.city = component.long_name; break;
+                        case 'country':
+                            address.country = component.long_name;
+                            break;
+                        case 'route':
+                             address.route = component.long_name; break;
+                          case 'street_number':
+                             address.streetNumber = component.long_name; break;    
+                        case 'administrative_area_level_4':
+                             address.lvl4 = component.long_name; break;       
+                         case 'administrative_area_level_3':
+                             address.lvl3 = component.long_name; break    
+                             
+                             case 'administrative_area_level_1':
+                             address.lvl1 = component.long_name; break
+                    }
+                     }
+                    
+                                        console.log(address);
+
+                    $('#organizerverificationform-city').val(address.city);
                     $('#organizerverificationform-province').val(address.lvl1);
                     $('#organizerverificationform-country').val(address.country);
                     $('#organizerverificationform-postal_code').val(address.postalCode);
