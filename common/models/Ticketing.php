@@ -14,7 +14,6 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property string $ticket_name
  * @property int $quantity
  * @property string $price
- * @property int $ticket_type
  * @property int $isDeleted
  * @property int $created_at
  * @property int $updated_at
@@ -52,8 +51,7 @@ class Ticketing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_event', 'quantity', 'price', 'ticket_type', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
-            [['created_at', 'updated_at'], 'required'],
+            [['id_event', 'quantity', 'price','isDeleted', 'created_at', 'updated_at'], 'integer'],
             [['ticket_name'], 'string', 'max' => 16],
             [['id_event'], 'exist', 'skipOnError' => true, 'targetClass' => Event::className(), 'targetAttribute' => ['id_event' => 'id']],
         ];
@@ -70,7 +68,6 @@ class Ticketing extends \yii\db\ActiveRecord
             'ticket_name' => 'Ticket Name',
             'quantity' => 'Quantity',
             'price' => 'Price',
-            'ticket_type' => 'Ticket Type',
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

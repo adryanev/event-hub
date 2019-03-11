@@ -21,30 +21,41 @@ $this->title = 'Buat Event';
                     <h4 class="header-title m-t-0 m-b-30">Data Event</h4>
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'title') ?>
+                                    <?= $form->field($model, 'isOffline')->dropDownList([0=>'Tidak',1=>'Ya'],['prompt'=>'Pilih'])->label('Event Offline?') ?>
+                                    <?= $form->field($model, 'dateRange') ?>
+                                    <?= $form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::class) ?>
+                                    <?= $form->field($model, 'publishingType') ?>
+                                    <?= $form->field($model, 'type')->widget(\kartik\select2\Select2::class, [
+                                        'data' => $dataType,
+                                        'options' => ['placeholder' => 'Pilih Tipe Event']
+                                    ]) ?>
+                                </div>
 
-                            <?= $form->field($model, 'title') ?>
-                            <?= $form->field($model, 'isOffline') ?>
-                            <?= $form->field($model, 'dateRange') ?>
-                            <?= $form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::class) ?>
-                            <?= $form->field($model, 'publishingType') ?>
-                            <?= $form->field($model, 'type')->widget(\kartik\select2\Select2::class, [
-                                'data' => $dataType,
-                                'options' => ['placeholder' => 'Pilih Tipe Event']
-                            ]) ?>
-                            <?= $form->field($model, 'topic')->widget(Select2::class, [
-                                'data' => $dataTopic,
-                                'options' => [
-                                    'placeholder' => 'Pilih Topic Event'
-                                ]
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'topic')->widget(Select2::class, [
+                                        'data' => $dataTopic,
+                                        'options' => [
+                                            'placeholder' => 'Pilih Topic Event'
+                                        ]
 
-                            ]) ?>
-                            <?= $form->field($model, 'showRemaining')->radioList(['0' => 'Tidak', '1' => 'Ya']) ?>
-                            <?= $form->field($model, 'eventPoster')->widget(\kartik\file\FileInput::class, [
-                                'pluginOptions' => [
+                                    ]) ?>
+                                    <?= $form->field($model, 'showRemaining')->radioList(['0' => 'Tidak', '1' => 'Ya']) ?>
+                                    <?= $form->field($model, 'dateRange') ?>
 
-                                    'showUpload' => false
-                                ]
-                            ]) ?>
+                                    <?= $form->field($model, 'eventPoster')->widget(\kartik\file\FileInput::class, [
+                                        'pluginOptions' => [
+
+                                            'showUpload' => false
+                                        ]
+                                    ]) ?>
+
+                                </div>
+                            </div>
+
+
 
 
                         </div>
@@ -62,18 +73,45 @@ $this->title = 'Buat Event';
                     <div class="row">
                         <div class="col-md-12">
 
-                            <?= $form->field($model, 'coordinate')->widget(\msvdev\widgets\mappicker\MapInput::class, [
-                                'service' => 'google',
-                                'apiKey' => Yii::$app->params['keys']['google_maps_browser_key2'],
-                                'mapZoom' => 12,
-                                'mapCenter' => [0.511907, 101.448639]
-                            ]) ?>
-                            <?= $form->field($model, 'address1') ?>
-                            <?= $form->field($model, 'address2') ?>
-                            <?= $form->field($model, 'country') ?>
-                            <?= $form->field($model, 'province') ?>
-                            <?= $form->field($model, 'city') ?>
-                            <?= $form->field($model, 'dateRange') ?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'coordinate')->widget(\msvdev\widgets\mappicker\MapInput::class, [
+                                        'service' => 'google',
+                                        'apiKey' => Yii::$app->params['keys']['google_maps_browser_key2'],
+                                        'mapZoom' => 12,
+                                        'mapCenter' => [0.511907, 101.448639]
+                                    ]) ?>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'address1') ?>
+                                    <?= $form->field($model, 'address2') ?>
+                                    <?= $form->field($model, 'country') ?>
+                                    <?= $form->field($model, 'province') ?>
+                                    <?= $form->field($model, 'city') ?>
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-box">
+                <div class="card-content">
+                    <h4 class="header-title m-t-0 m-b-30">Ticketing</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+
+
 
 
                         </div>
@@ -91,7 +129,6 @@ $this->title = 'Buat Event';
                     <div class="row">
                         <div class="col-md-12">
 
-                            <?php $form = ActiveForm::begin(); ?>
                             <?= $form->field($model, 'instagramLink') ?>
                             <?= $form->field($model, 'facebookLink') ?>
                             <?= $form->field($model, 'twitterLink') ?>

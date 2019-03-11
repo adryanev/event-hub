@@ -171,7 +171,6 @@ class m130524_201442_init extends Migration
             'ticket_name'=>$this->string(16),
             'quantity'=>$this->integer(),
             'price'=>$this->bigInteger(),
-            'ticket_type'=>$this->integer(),
             'isDeleted' => $this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
