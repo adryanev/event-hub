@@ -14,7 +14,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
-
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
         'request' => [
             'csrfParam' => '_csrf-admin',
         ],
@@ -69,17 +71,7 @@ return [
 
             ],
         ],
-        'formatter' => [
 
-            'datetimeFormat' => 'php:l, d F Y H:i',
-
-            'decimalSeparator' => ',',
-
-            'thousandSeparator' => '.',
-
-            'currencyCode' => 'Rp',
-
-        ],
     ],
 
     'params' => $params,

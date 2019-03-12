@@ -10,6 +10,7 @@
 namespace organizer\models;
 
 
+use common\models\HubWalletOrganizer;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
 use yii\base\Model;
@@ -74,6 +75,14 @@ class OrganizerSignupForm extends Model
 
         ];
 
+    }
+
+    public function createOrganizerWallet($idOrganizer){
+        $walletOrganizer = new HubWalletOrganizer();
+        $organizer = UserOrganizer::findOne($idOrganizer);
+        $walletOrganizer->id_organizer = $organizer->id;
+        $walletOrganizer->balance = 0;
+        return $walletOrganizer->save()? $walletOrganizer:null;
     }
 
 

@@ -13,6 +13,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -151,8 +152,14 @@ class SiteController extends Controller
                    ->setFrom([\Yii::$app->params['noReplyEmail'] => \Yii::$app->name . ' robot'])
                    ->setSubject("Signup Confirmation")
                    ->send();
+               $wallet = $model->createOrganizerWallet($user->id);
+               if(!is_null($wallet)){
+                   return $this->render('check-email',['user'=>$user]);
 
-               return $this->render('check-email',['user'=>$user]);
+               }
+               else{
+                   throw new BadRequestHttpException('Gagal membuat Akun');
+               }
             }
         }
 

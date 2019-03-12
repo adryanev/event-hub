@@ -212,7 +212,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%hub_wallet_user}}',[
             'id'=>$this->primaryKey(),
             'id_user'=>$this->integer()->notNull(),
-            'balance'=>$this->double()->notNull(),
+            'balance'=>$this->bigInteger()->notNull(),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
             'isDeleted' => $this->boolean()->defaultValue(0),
@@ -220,7 +220,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%hub_wallet_organizer}}',[
             'id'=>$this->primaryKey(),
             'id_organizer'=>$this->integer()->notNull(),
-            'balance'=>$this->double()->notNull(),
+            'balance'=>$this->bigInteger()->notNull(),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
             'isDeleted' => $this->boolean()->defaultValue(0),

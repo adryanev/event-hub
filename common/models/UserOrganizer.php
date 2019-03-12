@@ -149,7 +149,7 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getHubWalletOrganizers()
     {
-        return $this->hasMany(HubWalletOrganizer::className(), ['id_organizer' => 'id']);
+        return $this->hasOne(HubWalletOrganizer::className(), ['id_organizer' => 'id']);
     }
 
     /**

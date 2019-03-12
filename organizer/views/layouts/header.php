@@ -49,7 +49,7 @@ use yii\helpers\Html; ?>
 
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-money m-r-5"></i> Wallet <span><p class="text-success">Rp. 0</p></span></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-money m-r-5"></i> Wallet <span><p class="text-success"> <?=Yii::$app->formatter->asCurrency(Yii::$app->user->identity->hubWalletOrganizers->balance,'IDR')?></p></span></a></li>
                             <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
                             <li>
                                 <?= Html::a(

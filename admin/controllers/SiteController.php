@@ -2,6 +2,7 @@
 namespace admin\controllers;
 
 use admin\models\AdminLoginForm;
+use organizer\models\OrganizerSignupForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -20,6 +21,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only'=>['login','error','logout','index'],
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -107,4 +109,17 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+//    public function actionCreateWalletOrganizer($id){
+//        $model = new OrganizerSignupForm();
+//        $wallet = $model->createOrganizerWallet($id);
+//
+//        if(!is_null($wallet)){
+//            Yii::$app->session->setFlash('warning','gagal menambahkan wallet');
+//        }
+//        else{
+//            Yii::$app->session->setFlash('success','Berhasil mnambahkan wallet');
+//        }
+//        return $this->render('index');
+//    }
 }
