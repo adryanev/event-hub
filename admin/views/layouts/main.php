@@ -57,7 +57,12 @@ AppAsset::register($this);
 
     const channel = pusher.subscribe('admin-channel');
     channel.bind('organizer-verification-event', function (data) {
+        showNotification(data);
 
+
+    });
+
+    function showNotification(data) {
 
         lowLag.play(notifSound);
         console.log(data);
@@ -83,8 +88,7 @@ AppAsset::register($this);
         const message = 'Organizer '+data.organizer+', '+data.message;
         const title= 'Verifikasi Organizer';
 
-        let toast = toastr[notifType](message,title);
-        lastToast = toast;
+        lastToast = toastr[notifType](message, title);
 
         toastr.options = {
             "closeButton": true,
@@ -114,7 +118,7 @@ AppAsset::register($this);
         $('#cleartoasts').click(function () {
             toastr.clear();
         });
-    });
+    }
 
 </script>
 </body>

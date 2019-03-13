@@ -9,7 +9,7 @@ use yii\helpers\Html; ?>
 
             <!-- LOGO -->
             <div class="topbar-left">
-                <a href="index.html" class="logo"><span>Event<span>Hub</span></span></a>
+                <a href="index.html" class="logo"><span>Event<span>Hub</span></span> Organizer</a>
             </div>
             <!-- End Logo container-->
 

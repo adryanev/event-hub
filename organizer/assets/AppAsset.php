@@ -2,6 +2,7 @@
 
 namespace organizer\assets;
 
+use admin\assets\NotificationAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 
@@ -51,6 +52,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $depends = [
+        NotificationAsset::class,
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii2mod\alert\AlertAsset',
