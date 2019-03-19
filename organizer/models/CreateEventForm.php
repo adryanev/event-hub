@@ -12,6 +12,7 @@ namespace organizer\models;
 
 use Carbon\Carbon;
 use common\models\Event;
+use common\models\Ticketing;
 use yii\base\Model;
 use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
@@ -44,7 +45,7 @@ class CreateEventForm extends Model
     public $twitterLink;
     public $eventStatus;
     public $userOrganizer;
-
+    public $ticket;
     private $_poster_name;
     private $_event;
     private $latitude;
@@ -53,6 +54,7 @@ class CreateEventForm extends Model
     private $endDate;
     private $startTime;
     private $endTime;
+
 
 
     public function rules()
@@ -75,7 +77,7 @@ class CreateEventForm extends Model
     }
 
     public function createEvent(){
-        if(!$this->validate()) return false;
+        if(!$this->validate()) return null;
         $modelEvent = new Event();
         $modelEvent->title = $this->title;
         $modelEvent->is_offline = $this->isOffline;
@@ -98,11 +100,11 @@ class CreateEventForm extends Model
         $modelEvent->user_organizer = \Yii::$app->user->identity->getId();
 
         if($modelEvent->save()){
-            return true;
+            return $modelEvent;
         }
         else{
             \Yii::debug($modelEvent->getErrors());
-            return false;
+            return null;
         }
 
 

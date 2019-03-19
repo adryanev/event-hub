@@ -28,9 +28,6 @@ class TopicController extends ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class'=>ApiAuth::className()
-        ];
         $behaviors['contentNegotiator'] = [
             'class' => \yii\filters\ContentNegotiator::className(),
             'formats' => [

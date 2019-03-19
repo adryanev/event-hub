@@ -33,7 +33,7 @@
         "npm-asset/vue": "^2.5",
         "2amigos/yii2-google-maps-library": "*",
         "kartik-v/yii2-date-range": "dev-master",
-        "kidzen/yii2-dynamicform": "*"
+        "adryanev/yii2-dynamicform": "2.5"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

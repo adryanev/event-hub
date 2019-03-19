@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d377ffb4107897db5c2c2ea586b07c05",
+    "content-hash": "6c9ca48c5010bb2f2d8b2052ef2f1a9c",
     "packages": [
         {
             "name": "2amigos/yii2-google-maps-library",
@@ -55,6 +55,56 @@
                 "yii"
             ],
             "time": "2018-03-26T11:07:12+00:00"
+        },
+        {
+            "name": "adryanev/yii2-dynamicform",
+            "version": "2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adryanev/yii2-dynamicform.git",
+                "reference": "89c57af08ea5b4cd013eaf081dcac37682e74bc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adryanev/yii2-dynamicform/zipball/89c57af08ea5b4cd013eaf081dcac37682e74bc4",
+                "reference": "89c57af08ea5b4cd013eaf081dcac37682e74bc4",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/css-selector": "~3.4.11",
+                "symfony/dom-crawler": "~3.4.11",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "adryanev\\dynamicform\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "adryanev",
+                    "email": "adryanekavandra@gmail.com"
+                }
+            ],
+            "description": "It is widget to yii2 framework to clone form elements in a nested manner, maintaining accessibility.",
+            "keywords": [
+                "adryanev",
+                "copy DOM element",
+                "extension",
+                "widget",
+                "yii2",
+                "yii2 dynamic form",
+                "yii2-dynamicform"
+            ],
+            "time": "2019-03-13T08:05:37+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -930,53 +980,6 @@
             "time": "2018-12-11T10:34:32+00:00"
         },
         {
-            "name": "kidzen/yii2-dynamicform",
-            "version": "v2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kidzen/yii2-dynamicform.git",
-                "reference": "30647a79202f1195df3f10a142171d10c3dae7f1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kidzen/yii2-dynamicform/zipball/30647a79202f1195df3f10a142171d10c3dae7f1",
-                "reference": "30647a79202f1195df3f10a142171d10c3dae7f1",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/css-selector": "~2.8|~3.0",
-                "symfony/dom-crawler": "~2.8|~3.0",
-                "yiisoft/yii2": "~2.0.5"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kidzen\\dynamicform\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "kidzen",
-                    "email": "kidzenfxc@gmail.com"
-                }
-            ],
-            "description": "It is widget to yii2 framework to clone form elements in a nested manner, maintaining accessibility.",
-            "keywords": [
-                "copy DOM element",
-                "extension",
-                "kidzen",
-                "widget",
-                "yii2",
-                "yii2 dynamic form",
-                "yii2-dynamicform"
-            ],
-            "time": "2017-08-31T16:31:37+00:00"
-        },
-        {
             "name": "msvdev/yii2-widget-mappicker",
             "version": "1.0.1",
             "source": {
@@ -1025,16 +1028,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.14.2",
+            "version": "2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "a1f4f9abcde8241ce33bf5090896e9c16d0b4232"
+                "reference": "dd16fedc022180ea4292a03aabe95e9895677911"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a1f4f9abcde8241ce33bf5090896e9c16d0b4232",
-                "reference": "a1f4f9abcde8241ce33bf5090896e9c16d0b4232",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/dd16fedc022180ea4292a03aabe95e9895677911",
+                "reference": "dd16fedc022180ea4292a03aabe95e9895677911",
                 "shasum": ""
             },
             "require": {
@@ -1081,7 +1084,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-02-28T09:07:12+00:00"
+            "time": "2019-03-12T09:31:40+00:00"
         },
         {
             "name": "npm-asset/axios",
