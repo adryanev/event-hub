@@ -18,6 +18,7 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property int $organization_type
  * @property string $address_1
  * @property string $address_2
+ * @property string $sub_district
  * @property string $country
  * @property string $province
  * @property string $city
@@ -863,6 +864,23 @@ class UserOrganizer extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $this->verification_status = $verification_status;
     }
+
+    /**
+     * @return string
+     */
+    public function getSubDistrict(): string
+    {
+        return $this->sub_district;
+    }
+
+    /**
+     * @param string $sub_district
+     */
+    public function setSubDistrict(string $sub_district): void
+    {
+        $this->sub_district = $sub_district;
+    }
+
 
 
 

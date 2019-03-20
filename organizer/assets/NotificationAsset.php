@@ -7,7 +7,7 @@
  * Time: 8:41 PM
  */
 
-namespace admin\assets;
+namespace organizer\assets;
 
 
 use common\assets\PusherAsset;

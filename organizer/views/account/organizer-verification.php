@@ -19,9 +19,14 @@ $this->title = "Organizer Verification"
             <div class="row">
                 <div class="col-md-12">
                     <?php if (Yii::$app->user->identity->verification_status === \common\models\StatusKonten::ORGANIZER_NOT_VERIFIED): ?>
-                        <div class="alert alert-warning">
-                            <p>Untuk dapat mengakses akun, data anda harus diverifikasi dahulu oleh Admin.</p>
+                        <div class="card-box">
+                            <div class="panel-body">
+                                <div class="alert alert-warning">
+                                    <p>Untuk dapat mengakses akun, data anda harus diverifikasi dahulu oleh Admin.</p>
+                                </div>
+                            </div>
                         </div>
+
                     <?php endif; ?>
                     <div class="m-t-10 card-box">
                         <div class="panel-body">
@@ -75,6 +80,7 @@ $this->title = "Organizer Verification"
                                                     ]) ?>
                                                     <?= $form->field($model, 'address_1')->textInput() ?>
                                                     <?= $form->field($model, 'address_2')->textInput() ?>
+                                                    <?= $form->field($model, 'sub_district')->textInput() ?>
                                                     <?= $form->field($model, 'city')->textInput() ?>
                                                     <?= $form->field($model, 'province')->textInput() ?>
                                                     <?= $form->field($model, 'country')->textInput() ?>
@@ -203,6 +209,7 @@ var trackChange = function(element) {
                                         console.log(address);
 
                     $('#organizerverificationform-city').val(address.city);
+                    $('#organizerverificationform-sub_district').val(address.lvl3);
                     $('#organizerverificationform-province').val(address.lvl1);
                     $('#organizerverificationform-country').val(address.country);
                     $('#organizerverificationform-postal_code').val(address.postalCode);

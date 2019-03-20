@@ -92,6 +92,16 @@ return [
             'currencyCode' => 'Rp',
 
         ],
+        'webPusher'=> [
+            'class' => 'common\components\PusherComponent',
+            'app_id'=>$params['keys']['pusher_app_id'],
+            'secret'=>$params['keys']['pusher_secret'],
+            'key'=> $params['keys']['pusher_key'],
+            'options'=>[
+                'cluster'=>$params['keys']['pusher_cluster'],
+                'useTLS'=>true
+            ],
+        ],
 
             ],
     'params' => $params,

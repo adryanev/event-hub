@@ -68,6 +68,10 @@ class VerifikasiOrganizerController extends Controller
     }
 
     public function actionReject($id){
+        $modelOrganizer = UserOrganizer::findOne($id);
+        $modelOrganizer->setIsVerified(StatusKonten::STATUS_NOT_VERIFIED);
+        $modelOrganizer->setVerificationStatus(StatusKonten::ORGANIZER_NOT_VERIFIED);
+        $modelOrganizer->save(false);
         Yii::$app->getSession()->setFlash('success','Verifikasi Organizer Ditolak');
         return $this->redirect('index');
     }

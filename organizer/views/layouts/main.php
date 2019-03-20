@@ -23,18 +23,12 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-        const pusher = new Pusher('<?=Yii::$app->params['keys']['pusher_key']?>', {
-            cluster: '<?=Yii::$app->params['keys']['pusher_cluster']?>',
-            forceTLS: true
-        });
-
-    </script>
-</head>
+   </head>
 <body>
 <?php $this->beginBody() ?>
+<?= \common\widgets\PusherWidget::widget(['events' => [
+    'notification'],
+    'system'=>['organizer']]) ?>
 
 <?=$this->render('header')?>
 <?=$this->render('content',['content'=>$content])?>
@@ -44,20 +38,14 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
 <?php $this->endBody() ?>
 
 <script type="text/javascript">
-    lowLag.init();
-    const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
-    const url = 'http://admin.event-hub.com/verifikasi-organizer/';
-    lowLag.load(notifSound);
-    const notification = document.getElementById('notif-list');
 
-
-    const channel = pusher.subscribe('organizer-channel');
-    channel.bind('organizer-verification-event', function (data) {
-
-        showNotification(data);
-
-    });
     function showNotification(data) {
+        const notification = document.getElementById('notif-list');
+
+        lowLag.init();
+        const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
+        const url = 'http://admin.event-hub.com/verifikasi-organizer/';
+        lowLag.load(notifSound);
 
         lowLag.play(notifSound);
         console.log(data);
@@ -67,9 +55,9 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
             "                            <i class=\"zmdi zmdi-comment\"></i>\n" +
             "                        </div>\n" +
             "                        <div class=\"user-desc\">\n" +
-            "                            <span class=\"name\">"+data.organizer+"</span>\n" +
+            "                            <span class=\"name\">"+data.from+"</span>\n" +
             "                            <span class=\"desc\">"+data.message+"</span>\n" +
-            "                            <span class=\"time\">just now</span>\n" +
+            "                            <span class=\"time\">"+data.time+"</span>\n" +
             "                        </div>\n" +
             "                    </a>\n" +
             "                </li>";
@@ -80,8 +68,8 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
         let lastToast;
 
         const notifType = 'info';
-        const message = 'Organizer '+data.organizer+', '+data.message;
-        const title= 'Verifikasi Organizer';
+        const message = data.message;
+        const title= data.title;
 
         lastToast = toastr[notifType](message, title);
 

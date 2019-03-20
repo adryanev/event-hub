@@ -16,6 +16,7 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property string $address_1
  * @property string $address_2
  * @property string $country
+ * @property string $sub_district
  * @property string $province
  * @property string $city
  * @property double $latitude

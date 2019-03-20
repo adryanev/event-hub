@@ -8,7 +8,7 @@ $this->title = 'Event-Hub Dashboard';
 <h4 class="page-title"><?=$this->title?></h4>
 <?php if(Yii::$app->user->identity->verification_status === \common\models\StatusKonten::ORGANIZER_NOT_VERIFIED) : ?>
     <div class="alert alert-danger">
-        <p>Akun anda harus diverifikasi admin agar bisa digunakan.</p>
+        <p>Akun anda harus diverifikasi admin agar bisa digunakan. <?=\yii\helpers\Html::a('Ajukan Verifikasi',\yii\helpers\Url::to(['account/organizer-verification']))?></p>
     </div>
 <?php elseif(Yii::$app->user->identity->verification_status === \common\models\StatusKonten::ORGANIZER_PENDING):?>
     <div class="alert alert-info">

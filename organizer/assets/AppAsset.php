@@ -2,9 +2,7 @@
 
 namespace organizer\assets;
 
-use admin\assets\NotificationAsset;
 use yii\web\AssetBundle;
-use yii\web\JqueryAsset;
 
 /**
  * Main admin application asset bundle.

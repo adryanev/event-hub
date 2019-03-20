@@ -29,6 +29,7 @@ class CreateEventForm extends Model
     public $country;
     public $province;
     public $city;
+    public $sub_district;
     public $coordinate;
     public $dateRange;
     /**
@@ -84,6 +85,9 @@ class CreateEventForm extends Model
         $modelEvent->venue_name = $this->venueName;
         $modelEvent->address_1 = $this->address1;
         $modelEvent->address_2 = $this->address2;
+        $modelEvent->sub_district = $this->sub_district;
+        $modelEvent->city = $this->city;
+        $modelEvent->province = $this->province;
         $this->setLatLong($this->coordinate);
         $this->setDateTime($this->dateRange);
         if($this->uploadPoster()){
