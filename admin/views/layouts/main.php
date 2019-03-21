@@ -40,7 +40,6 @@ AppAsset::register($this);
 
 
 
-
 <script type="text/javascript">
     function showNotification(data) {
         const notification = document.getElementById('notif-list');
@@ -72,7 +71,7 @@ AppAsset::register($this);
 
         const notifType = 'info';
         const message = data.message;
-        const title= data.title;
+        const title= data.from;
 
         lastToast = toastr[notifType](message, title);
 

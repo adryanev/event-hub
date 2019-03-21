@@ -3,8 +3,6 @@
 namespace admin\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "notification_admin".
@@ -15,24 +13,12 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property string $event
  * @property int $isOpened
  * @property int $isDeleted
- * @property string $created_at
- * @property string $updated_at
+ * @property int $created_at
+ * @property int $updated_at
+ * @property string $action
  */
 class NotificationAdmin extends \yii\db\ActiveRecord
 {
-    public function behaviors()
-    {
-        return
-            [
-                TimestampBehavior::className(),
-                'softDeleteBehavior' => [
-                    'class' => SoftDeleteBehavior::className(),
-                    'softDeleteAttributeValues' => [
-                        'isDeleted' => true
-                    ],
-                ],
-            ];
-    }
     /**
      * {@inheritdoc}
      */
@@ -47,9 +33,8 @@ class NotificationAdmin extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['messages'], 'string'],
-            [['isOpened', 'isDeleted'], 'integer'],
-            [['channel', 'event', 'created_at', 'updated_at'], 'string', 'max' => 255],
+            [['isOpened', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
+            [['messages', 'channel', 'event', 'action'], 'string', 'max' => 255],
         ];
     }
 
@@ -67,6 +52,7 @@ class NotificationAdmin extends \yii\db\ActiveRecord
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'action' => 'Action',
         ];
     }
 }

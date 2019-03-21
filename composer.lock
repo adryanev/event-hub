@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c9ca48c5010bb2f2d8b2052ef2f1a9c",
+    "content-hash": "f430e64f8280a06569a8a51b1f0f89a4",
     "packages": [
         {
             "name": "2amigos/yii2-google-maps-library",
@@ -1138,6 +1138,18 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/is-buffer/-/is-buffer-1.1.6.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/moment",
+            "version": "2.24.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/moment/-/moment-2.24.0.tgz"
             },
             "type": "npm-asset",
             "license": [

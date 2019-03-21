@@ -2,10 +2,7 @@
 
 namespace organizer\models;
 
-use common\models\UserOrganizer;
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "notification_organizer".
@@ -17,26 +14,14 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property int $id_organizer
  * @property int $isOpened
  * @property int $isDeleted
- * @property string $created_at
- * @property string $updated_at
+ * @property int $created_at
+ * @property int $updated_at
+ * @property string $action
  *
  * @property UserOrganizer $organizer
  */
 class NotificationOrganizer extends \yii\db\ActiveRecord
 {
-    public function behaviors()
-    {
-        return
-            [
-                TimestampBehavior::className(),
-                'softDeleteBehavior' => [
-                    'class' => SoftDeleteBehavior::className(),
-                    'softDeleteAttributeValues' => [
-                        'isDeleted' => true
-                    ],
-                ],
-            ];
-    }
     /**
      * {@inheritdoc}
      */
@@ -51,9 +36,8 @@ class NotificationOrganizer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['messages'], 'string'],
-            [['id_organizer', 'isOpened', 'isDeleted'], 'integer'],
-            [['channel', 'event', 'created_at', 'updated_at'], 'string', 'max' => 255],
+            [['id_organizer', 'isOpened', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
+            [['messages', 'channel', 'event', 'action'], 'string', 'max' => 255],
             [['id_organizer'], 'exist', 'skipOnError' => true, 'targetClass' => UserOrganizer::className(), 'targetAttribute' => ['id_organizer' => 'id']],
         ];
     }
@@ -73,6 +57,7 @@ class NotificationOrganizer extends \yii\db\ActiveRecord
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'action' => 'Action',
         ];
     }
 

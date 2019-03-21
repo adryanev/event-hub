@@ -44,9 +44,11 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
 
         lowLag.init();
         const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
-        const url = 'http://admin.event-hub.com/verifikasi-organizer/';
+        const url = data.action;
         lowLag.load(notifSound);
 
+        const dataTime = data.time;
+        const time = moment.unix(dataTime);
         lowLag.play(notifSound);
         console.log(data);
         let html = "<li class=\"list-group-item\">\n" +
@@ -57,7 +59,7 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
             "                        <div class=\"user-desc\">\n" +
             "                            <span class=\"name\">"+data.from+"</span>\n" +
             "                            <span class=\"desc\">"+data.message+"</span>\n" +
-            "                            <span class=\"time\">"+data.time+"</span>\n" +
+            "                            <span class=\"time\">"+time.fromNow()+"</span>\n" +
             "                        </div>\n" +
             "                    </a>\n" +
             "                </li>";
@@ -69,7 +71,7 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
 
         const notifType = 'info';
         const message = data.message;
-        const title= data.title;
+        const title= data.from;
 
         lastToast = toastr[notifType](message, title);
 

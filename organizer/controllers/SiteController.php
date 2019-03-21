@@ -186,17 +186,14 @@ class SiteController extends Controller
         $data['from'] = 'Wanabee54';
         $data['idOrganizer'] = 1;
         $data['title'] = "Verifikasi";
-        $data['time'] = Carbon::now()->diffForHumans();
+        $data['time'] = Carbon::now()->timestamp;
        $this->sendNotif($data);
 
     }
 
     private function sendNotif(array $data){
-
-        $channel = 'admin-channel';
-        $event = 'notification';
         $message = $data;
-        var_dump(Yii::$app->webPusher->pushToAdmin($message,1));
+        Yii::$app->webPusher->broadcastToAdmin($message);
     }
 
 

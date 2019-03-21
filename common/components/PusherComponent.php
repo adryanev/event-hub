@@ -14,6 +14,11 @@ use Pusher\PusherException;
 use Yii;
 use yii\base\Component;
 
+/**
+ *
+ * @property \Pusher\Pusher $pusher
+ */
+
 class PusherComponent extends Component
 {
 
@@ -59,9 +64,6 @@ class PusherComponent extends Component
      * @param $channel
      * @param $event
      * @param $data
-     * @param null $socket_id
-     * @param bool $debug
-     * @param bool $already_encoded
      * @return array|bool
      * @throws PusherException
      */
@@ -69,6 +71,38 @@ class PusherComponent extends Component
         return $this->_pusher->trigger($channel,$event,$data);
     }
 
+    /**
+     * @param $data
+     * @param $event
+     * @param string $channel
+     * @return array|bool
+     * @throws PusherException
+     */
+    public function broadcastToAdmin($data, $event ='notification', $channel='admin-channel'){
+        return $this->push($channel, $event, $data);
+    }
+
+    /**
+     * @param $data
+     * @param string $event
+     * @param string $channel
+     * @return array|bool
+     * @throws PusherException
+     */
+    public function  broadcastToOrganizer($data, $event='notification', $channel='organizer-channel'){
+        return $this->push($channel, $event, $data);
+    }
+
+    /**
+     * @param $data
+     * @param string $event
+     * @param string $channel
+     * @return array|bool
+     * @throws PusherException
+     */
+    public function  broadcastToParticipant($data, $event='notification', $channel = 'participant-channel'){
+        return $this->push($channel, $event, $data);
+    }
     /**
      * @param $data
      * @param null $user_id

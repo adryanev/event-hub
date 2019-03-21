@@ -2,7 +2,7 @@
 
 namespace admin\assets;
 
-use common\assets\PusherAsset;
+use common\assets\NpmAsset;
 use yii\web\AssetBundle;
 
 /**
@@ -53,5 +53,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii2mod\alert\AlertAsset',
+        NpmAsset::class,
     ];
 }

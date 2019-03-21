@@ -62,6 +62,32 @@ return [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
+        'urlManagerAdmin' => [
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
+            'showScriptName' => false,
+            'baseUrl' => Yii::getAlias('@adminBaseUrl'),
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' =>[
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ],
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => Yii::getAlias('@frontendBaseUrl'),
+            // Disable index.php
+            'showScriptName' => false,
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' =>[
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ],
         'assetManager' => [
             'bundles' => [
                 'yii\web\JqueryAsset' => [
