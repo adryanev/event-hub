@@ -113,6 +113,7 @@ class VerifikasiOrganizerController extends Controller
         $modelNotif->action = $notification->urlAction;
         $modelNotif->organizer = $id;
         $modelNotif->messages = $notification->message;
+        $modelNotif->from = $notification->from;
         $modelNotif->created_at = $notification->time;
         $modelNotif->updated_at = $notification->time;
        return Yii::$app->webPusher->pushToOrganizer($notification->encode(), $id);

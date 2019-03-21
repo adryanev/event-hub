@@ -103,7 +103,7 @@ class AccountController extends Controller
         $channel = 'admin-channel';
         $event = 'notification';
         $notification = new Notification();
-        $notification->from = UserOrganizer::findOne($id)->id;
+        $notification->from = UserOrganizer::findOne($id)->name;
         $notification->image = 'info';
         $notification->time = Carbon::now()->timestamp;
         $notification->message = 'Meminta verifikasi organizer.';
@@ -114,6 +114,8 @@ class AccountController extends Controller
         $notifAdmin->event = $event;
         $notifAdmin->messages = $notification->message;
         $notifAdmin->action = $notification->urlAction;
+        $notifAdmin->from = $notification->from;
+
 
 
       return Yii::$app->webPusher->pushToOrganizer($notification->encode(),$id);

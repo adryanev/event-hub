@@ -15,7 +15,7 @@
             $notifs = \organizer\models\NotificationOrganizer::find()->where(['isDeleted' => 0])->orderBy('created_at desc')->limit(10)->all();
 
             foreach ($notifs as $item):
-                $message = \yii\helpers\Json::decode($item->messages);
+                $message = $item->messages;
                 if($item->event === 'organizer-verification-event'):
                     ?>
 
@@ -25,8 +25,8 @@
                                 <i class="zmdi zmdi-comment"></i>
                             </div>
                             <div class="user-desc">
-                                <span class="name"><?=$message['organizer']?></span>
-                                <span class="desc"><?= $message['message']?></span>
+                                <span class="name"><?=$item->from?></span>
+                                <span class="desc"><?= $message?></span>
                                 <span class="time"><?= \Carbon\Carbon::createFromTimestamp($item->created_at)->diffForHumans()?></span>
                             </div>
                         </a>

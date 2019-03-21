@@ -16,6 +16,7 @@ use Yii;
  * @property int $isDeleted
  * @property int $created_at
  * @property int $updated_at
+ * @property string $from
  * @property string $action
  *
  * @property UserOrganizer $organizer
@@ -37,7 +38,7 @@ class NotificationOrganizer extends \yii\db\ActiveRecord
     {
         return [
             [['id_organizer', 'isOpened', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
-            [['messages', 'channel', 'event', 'action'], 'string', 'max' => 255],
+            [['messages', 'channel', 'event', 'from', 'action'], 'string', 'max' => 255],
             [['id_organizer'], 'exist', 'skipOnError' => true, 'targetClass' => UserOrganizer::className(), 'targetAttribute' => ['id_organizer' => 'id']],
         ];
     }
@@ -57,6 +58,7 @@ class NotificationOrganizer extends \yii\db\ActiveRecord
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'from' => 'From',
             'action' => 'Action',
         ];
     }

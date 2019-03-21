@@ -15,6 +15,7 @@ use Yii;
  * @property int $isDeleted
  * @property int $created_at
  * @property int $updated_at
+ * @property string $from
  * @property string $action
  */
 class NotificationAdmin extends \yii\db\ActiveRecord
@@ -34,7 +35,7 @@ class NotificationAdmin extends \yii\db\ActiveRecord
     {
         return [
             [['isOpened', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
-            [['messages', 'channel', 'event', 'action'], 'string', 'max' => 255],
+            [['messages', 'channel', 'event', 'from', 'action'], 'string', 'max' => 255],
         ];
     }
 
@@ -52,6 +53,7 @@ class NotificationAdmin extends \yii\db\ActiveRecord
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'from' => 'From',
             'action' => 'Action',
         ];
     }
