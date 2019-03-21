@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Type */
 
-$this->title = $model->id;
+$this->title = $model->type_name;
 $this->params['breadcrumbs'][] = ['label' => 'Type', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

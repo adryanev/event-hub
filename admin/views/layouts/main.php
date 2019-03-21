@@ -24,18 +24,12 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-        const pusher = new Pusher('<?=Yii::$app->params['keys']['pusher_key']?>', {
-            cluster: '<?=Yii::$app->params['keys']['pusher_cluster']?>',
-            forceTLS: true
-        });
-
-    </script>
 </head>
 <body class="fixed-left">
 <?php $this->beginBody() ?>
+<?= \common\widgets\PusherWidget::widget(['events' => [
+    'notification'],
+    'system'=>['admin']]) ?>
 <?= $this->render('header') ?>
 <?= $this->render('sidebar') ?>
 <?= $this->render('content', ['content' => $content]) ?>
@@ -46,18 +40,14 @@ AppAsset::register($this);
 
 
 
-
 <script type="text/javascript">
-    lowLag.init();
-    const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
-    const url = 'http://admin.event-hub.com/verifikasi-organizer/';
-    lowLag.load(notifSound);
-    const notification = document.getElementById('notif-list');
+    function showNotification(data) {
+        const notification = document.getElementById('notif-list');
 
-
-    const channel = pusher.subscribe('admin-channel');
-    channel.bind('organizer-verification-event', function (data) {
-
+        lowLag.init();
+        const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
+        const url = 'http://admin.event-hub.com/verifikasi-organizer/';
+        lowLag.load(notifSound);
 
         lowLag.play(notifSound);
         console.log(data);
@@ -67,9 +57,9 @@ AppAsset::register($this);
             "                            <i class=\"zmdi zmdi-comment\"></i>\n" +
             "                        </div>\n" +
             "                        <div class=\"user-desc\">\n" +
-            "                            <span class=\"name\">"+data.organizer+"</span>\n" +
+            "                            <span class=\"name\">"+data.from+"</span>\n" +
             "                            <span class=\"desc\">"+data.message+"</span>\n" +
-            "                            <span class=\"time\">just now</span>\n" +
+            "                            <span class=\"time\">"+data.time+"</span>\n" +
             "                        </div>\n" +
             "                    </a>\n" +
             "                </li>";
@@ -80,11 +70,10 @@ AppAsset::register($this);
         let lastToast;
 
         const notifType = 'info';
-        const message = 'Organizer '+data.organizer+', '+data.message;
-        const title= 'Verifikasi Organizer';
+        const message = data.message;
+        const title= data.from;
 
-        let toast = toastr[notifType](message,title);
-        lastToast = toast;
+        lastToast = toastr[notifType](message, title);
 
         toastr.options = {
             "closeButton": true,
@@ -114,7 +103,7 @@ AppAsset::register($this);
         $('#cleartoasts').click(function () {
             toastr.clear();
         });
-    });
+    }
 
 </script>
 </body>

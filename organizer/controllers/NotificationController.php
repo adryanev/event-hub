@@ -10,7 +10,13 @@
 namespace organizer\controllers;
 
 
-class NotificationController
+use yii\web\Controller;
+
+class NotificationController extends Controller
 {
+
+    public function actionIndex(){
+
+    }
 
 }

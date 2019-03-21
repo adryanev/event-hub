@@ -11,7 +11,9 @@ namespace organizer\controllers;
 
 
 use admin\models\NotificationAdmin;
+use Carbon\Carbon;
 use common\models\Bank;
+use common\models\Notification;
 use common\models\Organization;
 use common\models\StatusKonten;
 use common\models\UserOrganizer;
@@ -81,10 +83,7 @@ class AccountController extends Controller
                 $model2->verificationFiles = UploadedFile::getInstances($model2,'verificationFiles');
                 if($model2->saveToDb()){
                     Yii::$app->getSession()->setFlash('success','Berhasil Request Verifikasi Akun');
-                    $data['idOrganizer'] = $model->getOrganizer()->id;
-                    $data['message'] = 'meminta verifikasi organizer.';
-                    $data['organizer'] = $model->name;
-                    $this->sendNotif($data);
+                    $this->sendNotification($model->getOrganizer()->id);
                     return $this->goHome();
                 }
             }
@@ -99,36 +98,27 @@ class AccountController extends Controller
         ]);
     }
 
-    private function sendNotif(array $data){
+    protected function sendNotification($id){
 
         $channel = 'admin-channel';
-        $event = 'organizer-verification-event';
-        $message = Json::encode($data);
+        $event = 'notification';
+        $notification = new Notification();
+        $notification->from = UserOrganizer::findOne($id)->name;
+        $notification->image = 'info';
+        $notification->time = Carbon::now()->timestamp;
+        $notification->message = 'Meminta verifikasi organizer.';
+        $notification->urlAction= Yii::$app->urlManagerAdmin->createAbsoluteUrl(['verifikasi-organizer/index']);
+
         $notifAdmin = new NotificationAdmin();
         $notifAdmin->channel = $channel;
         $notifAdmin->event = $event;
-        $notifAdmin->messages = $message;
-        $notifAdmin->isOpened = StatusKonten::NOTIFICATION_NOT_READ;
+        $notifAdmin->messages = $notification->message;
+        $notifAdmin->action = $notification->urlAction;
+        $notifAdmin->from = $notification->from;
 
-        $options = [
-            'cluster'=>Yii::$app->params['keys']['pusher_cluster'],
-            'useTLS'=>'true'
-        ];
-        try {
-            $pusher = new Pusher(
-                Yii::$app->params['keys']['pusher_key'],
-                Yii::$app->params['keys']['pusher_secret'],
-                Yii::$app->params['keys']['pusher_app_id'],
-                $options
-            );
-        } catch (\Exception $e) {
-        }
 
-        try {
-            $pusher->trigger($channel, $event, $data);
-            $notifAdmin->save();
-        } catch (\Exception $e) {
-        }
+
+      return Yii::$app->webPusher->pushToOrganizer($notification->encode(),$id);
 
     }
 

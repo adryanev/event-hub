@@ -35,9 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attributes' => [
                                         'id',
             'name',
-            'isDeleted',
-            'created_at',
-            'updated_at',
+            'isDeleted:boolean',
+            'created_at:datetime',
+            'updated_at:datetime',
                             ],
                             ]) ?>
                         </div>

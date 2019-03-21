@@ -23,9 +23,12 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-</head>
+   </head>
 <body>
 <?php $this->beginBody() ?>
+<?= \common\widgets\PusherWidget::widget(['events' => [
+    'notification'],
+    'system'=>['organizer']]) ?>
 
 <?=$this->render('header')?>
 <?=$this->render('content',['content'=>$content])?>
@@ -33,6 +36,76 @@ $this->registerJsFile('@web/js/modernizr.min.js',['position'=>\yii\web\View::POS
 <?=$this->render('right-sidebar')?>
 
 <?php $this->endBody() ?>
+
+<script type="text/javascript">
+
+    function showNotification(data) {
+        const notification = document.getElementById('notif-list');
+
+        lowLag.init();
+        const notifSound = '<?= Yii::getAlias('@web/sounds/dont-think-so.ogg')?>';
+        const url = data.action;
+        lowLag.load(notifSound);
+
+        const dataTime = data.time;
+        const time = moment.unix(dataTime);
+        lowLag.play(notifSound);
+        console.log(data);
+        let html = "<li class=\"list-group-item\">\n" +
+            "                    <a href=\""+url+"\" class=\"user-list-item\">\n" +
+            "                        <div class=\"icon bg-info\">\n" +
+            "                            <i class=\"zmdi zmdi-comment\"></i>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"user-desc\">\n" +
+            "                            <span class=\"name\">"+data.from+"</span>\n" +
+            "                            <span class=\"desc\">"+data.message+"</span>\n" +
+            "                            <span class=\"time\">"+time.fromNow()+"</span>\n" +
+            "                        </div>\n" +
+            "                    </a>\n" +
+            "                </li>";
+        notification.insertAdjacentHTML('afterbegin',html)
+
+        let counter = -1;
+        let toastCounter = 0;
+        let lastToast;
+
+        const notifType = 'info';
+        const message = data.message;
+        const title= data.from;
+
+        lastToast = toastr[notifType](message, title);
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+
+        function getLastToast() {
+            return lastToast;
+
+        }
+        $('#clearlasttoast').click(function () {
+            toastr.clear(getLastToast());
+        });
+        $('#cleartoasts').click(function () {
+            toastr.clear();
+        });
+    }
+
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>

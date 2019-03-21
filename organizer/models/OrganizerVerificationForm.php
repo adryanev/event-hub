@@ -28,6 +28,7 @@ class OrganizerVerificationForm extends Model
     public $organization_type;
     public $address_1;
     public $address_2;
+    public $sub_district;
     public $country;
     public $province;
     public $city;
@@ -57,7 +58,7 @@ class OrganizerVerificationForm extends Model
     public function rules()
     {
         return [
-            [['name', 'email','terms', 'organization_type', 'address_1', 'country', 'province', 'city', 'postal_code', 'work_phone', 'description'], 'required'],
+            [['name', 'email','terms', 'organization_type', 'address_1', 'country', 'province', 'city', 'postal_code', 'sub_district', 'work_phone', 'description'], 'required'],
             [['address_2', 'coordinate', 'profile_picture', 'cell_phone', 'twitter', 'instagram', 'facebook', 'whatsapp', 'website', 'bank_name', 'bank_account'], 'safe'],
             [['coordinate'], 'string'],
             ['terms','boolean'],
@@ -93,6 +94,7 @@ class OrganizerVerificationForm extends Model
         $organizer->setAddress1($this->address_1);
         $organizer->setAddress2($this->address_2);
         $organizer->setOrganizationType($this->organization_type);
+        $organizer->setSubDistrict($this->sub_district);
         $organizer->setCountry($this->country);
         $organizer->setProvince($this->province);
         $organizer->setCity($this->city);

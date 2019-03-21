@@ -12,6 +12,7 @@ namespace organizer\models;
 
 use Carbon\Carbon;
 use common\models\Event;
+use common\models\Ticketing;
 use yii\base\Model;
 use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
@@ -28,6 +29,7 @@ class CreateEventForm extends Model
     public $country;
     public $province;
     public $city;
+    public $sub_district;
     public $coordinate;
     public $dateRange;
     /**
@@ -44,7 +46,7 @@ class CreateEventForm extends Model
     public $twitterLink;
     public $eventStatus;
     public $userOrganizer;
-
+    public $ticket;
     private $_poster_name;
     private $_event;
     private $latitude;
@@ -53,6 +55,7 @@ class CreateEventForm extends Model
     private $endDate;
     private $startTime;
     private $endTime;
+
 
 
     public function rules()
@@ -75,13 +78,16 @@ class CreateEventForm extends Model
     }
 
     public function createEvent(){
-        if(!$this->validate()) return false;
+        if(!$this->validate()) return null;
         $modelEvent = new Event();
         $modelEvent->title = $this->title;
         $modelEvent->is_offline = $this->isOffline;
         $modelEvent->venue_name = $this->venueName;
         $modelEvent->address_1 = $this->address1;
         $modelEvent->address_2 = $this->address2;
+        $modelEvent->sub_district = $this->sub_district;
+        $modelEvent->city = $this->city;
+        $modelEvent->province = $this->province;
         $this->setLatLong($this->coordinate);
         $this->setDateTime($this->dateRange);
         if($this->uploadPoster()){
@@ -95,14 +101,14 @@ class CreateEventForm extends Model
         $modelEvent->instagram_link = $this->instagramLink;
         $modelEvent->facebook_link = $this->facebookLink;
         $modelEvent->event_status = $this->eventStatus;
-        $modelEvent->user_organizer = $this->userOrganizer;
+        $modelEvent->user_organizer = \Yii::$app->user->identity->getId();
 
         if($modelEvent->save()){
-            return true;
+            return $modelEvent;
         }
         else{
             \Yii::debug($modelEvent->getErrors());
-            return false;
+            return null;
         }
 
 

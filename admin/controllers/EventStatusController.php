@@ -67,7 +67,8 @@ class EventStatusController extends Controller
         $model = new EventStatus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success','Berhasil menambah Event Status');
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -87,6 +88,8 @@ class EventStatusController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success','Berhasil mengubah Event Status');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -104,7 +107,8 @@ class EventStatusController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->softDelete();
+        Yii::$app->session->setFlash('success','Berhasil menghapus Event Status');
 
         return $this->redirect(['index']);
     }

@@ -22,9 +22,10 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
 
         $this->createTable('{{%notification_admin}}',[
             'id'=>$this->primaryKey(),
-            'messages'=>$this->json(),
+            'messages'=>$this->string(),
             'channel'=>$this->string(),
             'event'=>$this->string(),
+            'id_admin'=>$this->integer(),
             'isOpened'=>$this->boolean()->defaultValue(0),
             'isDeleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
@@ -33,7 +34,7 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
         ],$tableOptions);
         $this->createTable('{{%notification_organizer}}',[
             'id'=>$this->primaryKey(),
-            'messages'=>$this->json(),
+            'messages'=>$this->string(),
             'channel'=>$this->string(),
             'event'=>$this->string(),
             'id_organizer'=>$this->integer(),
@@ -44,7 +45,7 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
         ],$tableOptions);
         $this->createTable('{{%notification_participant}}',[
             'id'=>$this->primaryKey(),
-            'messages'=>$this->json(),
+            'messages'=>$this->string(),
             'channel'=>$this->string(),
             'event'=>$this->string(),
             'id_participant'=>$this->integer(),
@@ -55,6 +56,11 @@ class m190125_083229_add_tabel_notification_for_user extends Migration
         ],$tableOptions);
 
 
+        $this->addForeignKey('fk-notification_admin-administrator',
+            '{{%notification_admin}}',
+            'id_admin',
+            '{{%administrator}}',
+            'id');
         $this->addForeignKey('fk-notification_organizer-user_organizer',
             '{{%notification_organizer}}',
             'id_organizer',

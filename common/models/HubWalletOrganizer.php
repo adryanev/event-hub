@@ -48,9 +48,9 @@ class HubWalletOrganizer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_organizer', 'balance', 'created_at', 'updated_at'], 'required'],
+            [['id_organizer', 'balance'], 'required'],
             [['id_organizer', 'created_at', 'updated_at', 'isDeleted'], 'integer'],
-            [['balance'], 'number'],
+            [['balance'], 'integer'],
             [['id_organizer'], 'exist', 'skipOnError' => true, 'targetClass' => UserOrganizer::className(), 'targetAttribute' => ['id_organizer' => 'id']],
         ];
     }

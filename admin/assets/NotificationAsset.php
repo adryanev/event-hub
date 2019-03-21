@@ -31,8 +31,6 @@ class NotificationAsset extends AssetBundle
         parent::init();
 
     }
-    public $depends = [
-        PusherAsset::class
-    ];
+
 
 }

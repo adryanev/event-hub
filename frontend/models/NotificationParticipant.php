@@ -2,10 +2,7 @@
 
 namespace frontend\models;
 
-use common\models\UserParticipant;
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "notification_participant".
@@ -17,27 +14,15 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
  * @property int $id_participant
  * @property int $isOpened
  * @property int $isDeleted
- * @property string $created_at
- * @property string $updated_at
+ * @property int $created_at
+ * @property int $updated_at
+ * @property string $from
+ * @property string $action
  *
  * @property UserParticipant $participant
  */
 class NotificationParticipant extends \yii\db\ActiveRecord
 {
-
-    public function behaviors()
-    {
-        return
-            [
-                TimestampBehavior::className(),
-                'softDeleteBehavior' => [
-                    'class' => SoftDeleteBehavior::className(),
-                    'softDeleteAttributeValues' => [
-                        'isDeleted' => true
-                    ],
-                ],
-            ];
-    }
     /**
      * {@inheritdoc}
      */
@@ -52,9 +37,8 @@ class NotificationParticipant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['messages'], 'string'],
-            [['id_participant', 'isOpened', 'isDeleted'], 'integer'],
-            [['channel', 'event', 'created_at', 'updated_at'], 'string', 'max' => 255],
+            [['id_participant', 'isOpened', 'isDeleted', 'created_at', 'updated_at'], 'integer'],
+            [['messages', 'channel', 'event', 'from', 'action'], 'string', 'max' => 255],
             [['id_participant'], 'exist', 'skipOnError' => true, 'targetClass' => UserParticipant::className(), 'targetAttribute' => ['id_participant' => 'id']],
         ];
     }
@@ -74,6 +58,8 @@ class NotificationParticipant extends \yii\db\ActiveRecord
             'isDeleted' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'from' => 'From',
+            'action' => 'Action',
         ];
     }
 

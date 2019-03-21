@@ -14,7 +14,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
-
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
         'request' => [
             'csrfParam' => '_csrf-admin',
         ],
@@ -36,11 +38,35 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
+
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
+            // Disable index.php
+            'showScriptName' => false,
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' =>[
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ],
+        'urlManagerOrganizer' => [
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
+            'showScriptName' => false,
+            'baseUrl' => Yii::getAlias('@organizerBaseUrl'),
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' =>[
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ],
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => Yii::getAlias('@frontendBaseUrl'),
             // Disable index.php
             'showScriptName' => false,
             // Disable r= routes
@@ -69,16 +95,15 @@ return [
 
             ],
         ],
-        'formatter' => [
-
-            'datetimeFormat' => 'php:l, d F Y H:i',
-
-            'decimalSeparator' => ',',
-
-            'thousandSeparator' => '.',
-
-            'currencyCode' => 'Rp',
-
+        'webPusher'=> [
+            'class' => 'common\components\PusherComponent',
+            'app_id'=>$params['keys']['pusher_app_id'],
+            'secret'=>$params['keys']['pusher_secret'],
+            'key'=> $params['keys']['pusher_key'],
+            'options'=>[
+                'cluster'=>$params['keys']['pusher_cluster'],
+                'useTLS'=>true
+            ],
         ],
     ],
 
