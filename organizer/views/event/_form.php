@@ -32,6 +32,7 @@ use yii\widgets\ActiveForm;
                                             'convertFormat'=>true,
                                             'pluginOptions'=>[
                                                     'timePicker'=>true,
+                                                         'timePicker24Hour'=> true,
                                                      'locale'=>['format'=>'Y-m-d h:i:s']
                                             ]
                                     ])->label('Waktu Event') ?>
@@ -91,10 +92,13 @@ use yii\widgets\ActiveForm;
                                 </div>
 
                                 <div class="col-md-6">
-                                    <?= $form->field($model, 'address1') ?>
-                                    <?= $form->field($model, 'address2') ?>
-                                    <?= $form->field($model, 'city') ?>
-                                    <?= $form->field($model, 'province') ?>
+                                    <?= $form->field($model, 'address1')->label(
+                                            'Alamat 1'
+                                    ) ?>
+                                    <?= $form->field($model, 'address2')->label('Alamat 2') ?>
+                                    <?= $form->field($model, 'sub_district')->label('Kecamatan') ?>
+                                    <?= $form->field($model, 'city')->label('Kabupaten/Kota') ?>
+                                    <?= $form->field($model, 'province')->label('Provinsi') ?>
                                     <?= $form->field($model, 'country') ?>
 
                                 </div>
@@ -214,6 +218,11 @@ use yii\widgets\ActiveForm;
 </div>
 
 <?php
+$html = <<<DATA
+
+DATA;
+
+
 $js = <<<JS
 
 
@@ -284,6 +293,7 @@ var trackChange = function(element) {
                                         console.log(address);
 
                     $('#createeventform-city').val(address.city);
+                    $('#createeventform-sub_district').val(address.lvl3);
                     $('#createeventform-province').val(address.lvl1);
                     $('#createeventform-country').val(address.country);
                     
