@@ -34,6 +34,8 @@ return [
         'setWritable' => [
             'admin/runtime',
             'admin/web/assets',
+            'organizer/runtime',
+            'organizer/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],
@@ -43,6 +45,7 @@ return [
         ],
         'setCookieValidationKey' => [
             'admin/config/main-local.php',
+            'organizer/config/main-local.php',
             'frontend/config/main-local.php',
         ],
     ],
@@ -51,6 +54,8 @@ return [
         'setWritable' => [
             'admin/runtime',
             'admin/web/assets',
+            'organizer/web/assets',
+            'organizer/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],
@@ -59,6 +64,7 @@ return [
         ],
         'setCookieValidationKey' => [
             'admin/config/main-local.php',
+            'organizer/config/main-local.php',
             'frontend/config/main-local.php',
         ],
     ],

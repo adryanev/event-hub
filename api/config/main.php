@@ -6,8 +6,14 @@
  * Time: 22:29
  */
 
-$db     = require(__DIR__ . '/../../common/config/main-local.php');
-$params = require(__DIR__ . '/../../common/config/params.php');
+use yii\web\Response;
+
+$params = array_merge(
+    require __DIR__ . '/../../common/config/params.php',
+    require __DIR__ . '/../../common/config/params-local.php',
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
+);
 
 $config = [
     'id' => 'event-hub-api',
@@ -18,14 +24,13 @@ $config = [
     'components' => [
         'response' => [
             'formatters' => [
-                \yii\web\Response::FORMAT_JSON => [
+                    Response::FORMAT_JSON => [
                     'class' => 'yii\web\JsonResponseFormatter',
                     'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
                     'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-                    // ...
                 ],
             ],
-            'format' => \yii\web\Response::FORMAT_JSON,
+            'format' => Response::FORMAT_JSON,
 
         ],
         'request' => [
@@ -39,17 +44,7 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error','warning'],
-                    'logFile' => '@runtime/logs/'.date('Y').'/'.date('m').'/debug-'.date('Y-m-d').'.log',
-                    'logVars' => ['_GET','_POST','_SERVER.COMPUTERNAME'],
-                    'categories' => [],
-                ],
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['info'],
-                    'logFile' => '@runtime/logs/'.date('Y').'/'.date('m').'/access-'.date('Y-m-d').'.log',
-                    'logVars' => ['_SERVER.COMPUTERNAME','_SERVER.USERNAME'],
-                    'categories' => ['application'],
+                    'levels' => ['error', 'warning'],
                 ],
             ],
         ],
@@ -62,7 +57,6 @@ $config = [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
-        'db' => $db['components']['db'],
         'user' => [
             'class'=>'yii\web\User',
             'identityClass' => 'api\models\ApiIdentity',
@@ -77,7 +71,6 @@ $config = [
             'class' => 'api\modules\v1\Module',
         ],
     ],
-
     'params' => $params,
 ];
 
