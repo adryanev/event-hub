@@ -79,6 +79,7 @@ class m190414_101533_init_db_table extends Migration
             'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'is_verified' => $this->boolean(),
+            'status_verifikasi'=>$this->string(15),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);

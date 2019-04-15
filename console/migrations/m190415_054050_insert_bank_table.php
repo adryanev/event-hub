@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m190111_115321_insert_bank_code
+ * Class m190415_054050_insert_bank_table
  */
-class m190111_115321_insert_bank_code extends Migration
+class m190415_054050_insert_bank_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -150,7 +150,7 @@ class m190111_115321_insert_bank_code extends Migration
             ['BANK CHINA TRUST INDONESIA', '949',0,1547207486,1547207486],
             ['BANK COMMONWEALTH', '950',0,1547207486,1547207486]
         ];
-        $this->batchInsert('{{%master_bank}}', ['name', 'code', 'isDeleted', 'created_at', 'updated_at'],$bankArray);
+        $this->batchInsert('{{%bank}}', ['nama', 'kode', 'is_deleted', 'created_at', 'updated_at'],$bankArray);
     }
 
     /**
@@ -158,9 +158,7 @@ class m190111_115321_insert_bank_code extends Migration
      */
     public function safeDown()
     {
-        echo "m190111_115321_insert_bank_code cannot be reverted.\n";
-
-        return false;
+        $this->truncateTable('{{%bank}}');
     }
 
     /*
@@ -172,7 +170,7 @@ class m190111_115321_insert_bank_code extends Migration
 
     public function down()
     {
-        echo "m190111_115321_insert_bank_code cannot be reverted.\n";
+        echo "m190415_054050_insert_bank_table cannot be reverted.\n";
 
         return false;
     }
