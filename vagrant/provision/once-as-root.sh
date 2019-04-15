@@ -74,7 +74,7 @@ a2ensite app.conf
 echo "Done!"
 
 info "Initailize databases for MySQL"
-mysql -uroot <<< 'CREATE DATABASE `event-hub`;'
+mysql -uroot <<< 'CREATE DATABASE `event-hub-dev`;'
 echo "Done!"
 
 info "Install composer"

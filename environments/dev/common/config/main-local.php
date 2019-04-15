@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=event-hub',
+            'dsn' => 'mysql:host=localhost;dbname=event-hub-dev',
             'username' => 'developer',
             'password' => '',
             'charset' => 'utf8',
