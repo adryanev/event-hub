@@ -115,6 +115,7 @@ class m190414_101533_init_db_table extends Migration
             'id' => $this->primaryKey(),
             'nama' => $this->string()->notNull(),
             'kode' => $this->string()->notNull(),
+            'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -124,6 +125,7 @@ class m190414_101533_init_db_table extends Migration
         $this->createTable('{{%organisasi}}', [
             'id' => $this->primaryKey(),
             'nama' => $this->string()->notNull(),
+            'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -132,6 +134,7 @@ class m190414_101533_init_db_table extends Migration
         $this->createTable('{{%topik_event}}', [
             'id' => $this->primaryKey(),
             'nama_topik' => $this->string()->notNull(),
+            'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -140,6 +143,7 @@ class m190414_101533_init_db_table extends Migration
         $this->createTable('{{%tipe_event}}', [
             'id' => $this->primaryKey(),
             'nama_tipe' => $this->string()->notNull(),
+            'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -148,6 +152,7 @@ class m190414_101533_init_db_table extends Migration
         $this->createTable('{{%status_event}}', [
             'id' => $this->primaryKey(),
             'nama_status' => $this->string()->notNull(),
+            'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -256,8 +261,8 @@ class m190414_101533_init_db_table extends Migration
             'facebook_link'=>$this->string(),
             'twitter_link'=>$this->string(),
             'id_status_event'=>$this->integer(),
+            'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
-            'slug'=>$this->string(),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
         ],$tableOptions);
@@ -392,8 +397,8 @@ class m190414_101533_init_db_table extends Migration
             'is_deleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer()
-
         ],$tableOptions);
+
 
 
     }
