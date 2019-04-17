@@ -34,6 +34,7 @@ return [
         'setWritable' => [
             'admin/runtime',
             'admin/web/assets',
+            'api/runtime',
             'organizer/runtime',
             'organizer/web/assets',
             'frontend/runtime',
