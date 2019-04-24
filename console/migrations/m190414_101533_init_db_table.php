@@ -267,9 +267,9 @@ class m190414_101533_init_db_table extends Migration
             'updated_at'=>$this->integer(),
         ],$tableOptions);
 
-        $this->createTable('{{%ticket}}',[
+        $this->createTable('{{%tiket}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_event'=>$this->bigInteger(),
+            'id_event'=>$this->bigInteger(), //fk event
             'nama_tiket'=>$this->string(16),
             'jumlah'=>$this->integer(),
             'harga'=>$this->bigInteger(),
@@ -296,10 +296,10 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%transaksi_tiket}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_pengguna'=>$this->bigInteger(),
+            'id_pengguna'=>$this->bigInteger(), //fk pengguna
             'nomor_pembayaran'=>$this->string(),
-            'id_metode_pembayaran'=>$this->integer(),
-            'id_status_pembayaran'=>$this->integer(),
+            'id_metode_pembayaran'=>$this->integer(), //fk metode_pembayaran
+            'id_status_pembayaran'=>$this->integer(), //fk status_pembayaran
             'waktu_kadaluarsa'=>$this->integer(),
             'total_harga'=>$this->bigInteger(),
             'total_dibayar'=>$this->bigInteger(),
@@ -311,8 +311,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%detail_transaksi_tiket}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_transaksi'=>$this->bigInteger(),
-            'id_ticket'=>$this->bigInteger(),
+            'id_transaksi'=>$this->bigInteger(), //fk transaksi tiket
+            'id_tiket'=>$this->bigInteger(), // fk tiket
             'isDeleted' => $this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
@@ -320,8 +320,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%tiket_peserta}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_transaction'=>$this->bigInteger()->notNull(),
-            'id_pengguna'=>$this->bigInteger()->notNull(),
+            'id_transaksi'=>$this->bigInteger()->notNull(), //fk transaksi_tiket
+            'id_pengguna'=>$this->bigInteger()->notNull(), //fk pengguna
             'is_present'=> $this->boolean()->notNull(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
@@ -330,8 +330,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%topik_disukai}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_pengguna'=>$this->bigInteger()->notNull(),
-            'id_topik'=>$this->integer()->notNull(),
+            'id_pengguna'=>$this->bigInteger()->notNull(),//fk pengguna
+            'id_topik'=>$this->integer()->notNull(), //fk topik
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
             'is_deleted' => $this->boolean()->defaultValue(0),
@@ -339,8 +339,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%feedback}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_event'=>$this->bigInteger()->notNull(),
-            'id_pengguna'=>$this->bigInteger()->notNull(),
+            'id_event'=>$this->bigInteger()->notNull(),//fk event
+            'id_pengguna'=>$this->bigInteger()->notNull(), //fk pengguna
             'rating'=>$this->float(),
             'pesan'=>$this->text(),
             'created_at'=>$this->integer(),
@@ -350,8 +350,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%refund_tiket}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_transaction'=>$this->bigInteger(),
-            'amount'=>$this->bigInteger(),
+            'id_transaksi'=>$this->bigInteger(),//fk transaksi tiket
+            'jumlah'=>$this->bigInteger(),
             'is_success'=>$this->boolean(),
             'comment'=>$this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
@@ -370,8 +370,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%report_event}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_kategori_report'=>$this->integer(),
-            'id_event'=>$this->bigInteger(),
+            'id_kategori_report'=>$this->integer(),//fk kategori_report
+            'id_event'=>$this->bigInteger(), // fk event
             'komentar'=>$this->text(),
             'is_deleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
@@ -444,7 +444,7 @@ class m190414_101533_init_db_table extends Migration
         $this->dropTable('{{%transaksi_tiket}}');
         $this->dropTable('{{%status_pembayaran}}');
         $this->dropTable('{{%metode_pembayaran}}');
-        $this->dropTable('{{%ticket}}');
+        $this->dropTable('{{%tiket}}');
         $this->dropTable('{{%event}}');
         $this->dropTable('{{%transaksi_wallet_organizer}}');
         $this->dropTable('{{%transaksi_wallet_pengguna}}');
