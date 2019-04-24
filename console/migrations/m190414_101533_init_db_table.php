@@ -55,7 +55,7 @@ class m190414_101533_init_db_table extends Migration
             'id' => $this->bigPrimaryKey(),
             'id_akun' => $this->bigInteger(),
             'nama' => $this->string(),
-            'organisasi' => $this->string(),
+            'id_organisasi' => $this->integer(), //fk Organisasi
             'alamat_1' => $this->string(),
             'alamat_2' => $this->string(),
             'kelurahan' => $this->string(),
@@ -74,7 +74,7 @@ class m190414_101533_init_db_table extends Migration
             'facebook' => $this->string(255),
             'whatsapp' => $this->string(16),
             'website' => $this->string(),
-            'id_bank' => $this->integer(),
+            'id_bank' => $this->integer(), //fk Bank
             'nomor_rekening' => $this->string(),
             'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
@@ -102,7 +102,7 @@ class m190414_101533_init_db_table extends Migration
             'negara' => $this->string(),
             'kode_pos' => $this->string(6),
             'avatar' => $this->string(128)->defaultValue('avatar-pengguna.jpg'),
-            'id_bank' => $this->integer(),
+            'id_bank' => $this->integer(), //fk Bank
             'nomor_rekening' => $this->string(),
             'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
@@ -160,7 +160,7 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%verifikasi_organizer}}', [
             'id' => $this->bigPrimaryKey(),
-            'id_organizer' => $this->bigInteger(),
+            'id_organizer' => $this->bigInteger(), //fk Organizer
             'file_verifikasi' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
@@ -169,8 +169,8 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%subscribe}}', [
             'id' => $this->bigPrimaryKey(),
-            'id_pengguna' => $this->bigInteger(),
-            'id_organizer' => $this->bigInteger(),
+            'id_pengguna' => $this->bigInteger(), //fk pengguna
+            'id_organizer' => $this->bigInteger(), // fk organizer
             'notification' => $this->boolean()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -179,7 +179,7 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%wallet_organizer}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_organizer'=>$this->bigInteger()->notNull(),
+            'id_organizer'=>$this->bigInteger()->notNull(), //FK Organizer
             'saldo'=>$this->bigInteger()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
@@ -188,7 +188,7 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%wallet_pengguna}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_pengguna'=>$this->bigInteger()->notNull(),
+            'id_pengguna'=>$this->bigInteger()->notNull(), //FK pengguna
             'balance'=>$this->bigInteger()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
@@ -197,7 +197,7 @@ class m190414_101533_init_db_table extends Migration
 
 
         $this->createTable('{{%kategori_transaksi_wallet}}',[
-            'id'=>$this->bigPrimaryKey(),
+            'id'=>$this->primaryKey(),
             'nama_transaksi'=>$this->string(),
             'is_deleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
@@ -213,11 +213,11 @@ class m190414_101533_init_db_table extends Migration
         ],$tableOptions);
         $this->createTable('{{%transaksi_wallet_pengguna}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_wallet_pengguna'=>$this->bigInteger(),
-            'id_kategori_transaksi_wallet'=>$this->bigInteger(),
+            'id_wallet_pengguna'=>$this->bigInteger(), //fk wallet_pengguna
+            'id_kategori_transaksi_wallet'=>$this->integer(), //fk kategori_transaksi_wallet
             'jumlah'=>$this->bigInteger(),
             'waktu_transaksi'=>$this->integer(),
-            'id_status_transaksi'=>$this->integer(),
+            'id_status_transaksi'=>$this->integer(), //fk status_transaksi
             'is_deleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
@@ -225,11 +225,11 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%transaksi_wallet_organizer}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_wallet_organizer'=>$this->bigInteger(),
-            'id_kategori_transaksi_wallet'=>$this->bigInteger(),
+            'id_wallet_organizer'=>$this->bigInteger(), //fk wallet_organizer
+            'id_kategori_transaksi_wallet'=>$this->bigInteger(), //fk kategori_transaksi_wallet
             'jumlah'=>$this->bigInteger(),
             'waktu_transaksi'=>$this->integer(),
-            'id_status_transaksi'=>$this->integer(),
+            'id_status_transaksi'=>$this->integer(), //fk status_transaksi
             'is_deleted'=>$this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
@@ -237,7 +237,7 @@ class m190414_101533_init_db_table extends Migration
 
         $this->createTable('{{%event}}',[
             'id'=>$this->bigPrimaryKey(),
-            'id_organizer'=>$this->bigInteger(),
+            'id_organizer'=>$this->bigInteger(), //fk organizer
             'judul'=>$this->string()->notNull(),
             'lokasi'=>$this->string()->notNull(),
             'alamat_1'=>$this->string(),
@@ -254,13 +254,13 @@ class m190414_101533_init_db_table extends Migration
             'poster_event'=>$this->string()->notNull(),
             'deskripsi'=>$this->text(),
             'is_private'=>$this->boolean(),
-            'id_tipe'=>$this->integer()->notNull(),
-            'id_topik'=>$this->integer()->notNull(),
-            'tampilkan_sisa_tiket'=>$this->boolean()->notNull(),
+            'id_tipe'=>$this->integer()->notNull(), //fk tipe_event
+            'id_topik'=>$this->integer()->notNull(), //fk topik_event
+            'tampilkan_sisa_tiket'=>$this->boolean()->notNull()->defaultValue(1),
             'instagram_link'=>$this->string(),
             'facebook_link'=>$this->string(),
             'twitter_link'=>$this->string(),
-            'id_status_event'=>$this->integer(),
+            'id_status_event'=>$this->integer(), //fk_status_event
             'slug' => $this->string(),
             'is_deleted' => $this->boolean()->defaultValue(0),
             'created_at'=>$this->integer(),
@@ -398,6 +398,29 @@ class m190414_101533_init_db_table extends Migration
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer()
         ],$tableOptions);
+
+        // $this->createTable('{{%objek_notifikasi}}',[
+        //     'id'=>$this->bigPrimaryKey(),
+        //     'id_entitas'=> $this->integer(),
+        //     'id_tipe_entitas'=>$this->integer(),
+        //     'created_at'=>$this->integer(),
+        //     'updated_at'=>$this->integer(),
+        //     'status'=>$this->boolean()->defaultValue(1),
+
+        // ],$tableOptions);
+
+        // $this->createTable('{{%notifikasi}}',[
+        //     'id'=>$this->bigPrimaryKey(),
+        //     'id_objek_notifikasi'=> $this->bigInteger(),
+        //     'id_penerima'=>$this->bigInteger(),
+        //     'status'=>$this->boolean()->defaultValue(1),
+
+        // ],$tableOptions);
+
+        // $this->createTable('{{%aktor_notifikasi}}',[
+        //     'id'=>$this->bigPrimaryKey(),
+        //     ''
+        // ],$tableOptions);
 
 
 
